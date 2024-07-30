@@ -7,8 +7,9 @@ LIBMLX = ./include/mlx/libmlx.a
 CFLAGS = -Wall -Werror -Wextra -I$(INC)
 MLXFLAGS = -framework OpenGL -framework AppKit
 INCLUDE = -I 
+EXIT_DIR = ./src/exit
 
-SRCS = ./src/main.c ./src/window_management.c\
+SRCS = ./src/main.c ./src/window_management.c ./src/parsing/validate_cmdline.c ./src/exit/error.c ./src/exit/free.c\
 
 OBJS = $(SRCS:.c=.o)
 
