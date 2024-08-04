@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window_management.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/04 19:12:36 by naadam            #+#    #+#             */
+/*   Updated: 2024/08/04 19:17:54 by naadam           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "../include/cub3d.h"
 
 void	set_win_values(t_window *ups)
@@ -47,11 +60,18 @@ void	create_window(t_window *ups)
 	}
 }
 
-void    manage_window(t_window *ups)
+void    manage_window(t_data *main)
 {
-	set_win_values(ups);
-	create_window(ups);
-	mlx_hook(ups->window, 02, 1L << 0, keypress, ups);
-	mlx_hook(ups->window, 17, 1L << 0, handle_close, ups);
-	mlx_loop(ups->mlx);
+	main->window = malloc(sizeof(t_window));
+	if (!main->window)
+	{
+		main->type = 0;
+		error_message(main->type, main);
+	}
+	set_win_values(main->window);
+	create_window(main->window);
+	parse_map(main, main->window);
+	mlx_hook(main->window->window, 02, 1L << 0, keypress, main->window);
+	mlx_hook(main->window->window, 17, 1L << 0, handle_close, main->window);
+	mlx_loop(main->window->mlx);
 }
