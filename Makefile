@@ -9,7 +9,9 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 INCLUDE = -I 
 EXIT_DIR = ./src/exit
 
-SRCS = ./src/main.c ./src/window_management.c ./src/parsing/validate_cmdline.c ./src/exit/error.c ./src/exit/free.c\
+SRCS = ./src/main.c \
+		./src/parsing/validate_cmdline.c ./src/parsing/window_management.c \
+		./src/exit/error.c ./src/exit/free.c\
 
 OBJS = $(SRCS:.c=.o)
 

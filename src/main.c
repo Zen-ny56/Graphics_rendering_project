@@ -10,6 +10,7 @@ int main(int ac, char **av)
 	if (!main_struct)
 		return (-1);
 	validate_cmdline(av, main_struct);
+	// manage_window(main_struct);
 		// t_window *ups;
 		// ups = malloc(sizeof(t_window) * 1);
 		// if (!ups)

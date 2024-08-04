@@ -6,6 +6,8 @@ typedef struct s_map
 	char **layout;
 	int		width;
 	int		height;
+	int		player_x; // Player's starting x position
+	int		player_y; // Player's starting y position
 }			t_map;
 
 typedef struct s_window
