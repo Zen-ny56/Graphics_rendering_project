@@ -4,7 +4,7 @@
 typedef struct s_map
 {
 	char **layout;
-	unsigned int	width;// Length of a row
+	unsigned int	width;// Width of all columns
 	unsigned int	height;// No. of columns
 	unsigned int	player_x; // Player's starting x position
 	unsigned int	player_y; // Player's starting y position

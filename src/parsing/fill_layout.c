@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:01:52 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/04 20:14:14 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/04 21:02:40 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	allocate_map(t_map *map, t_data *main)
 {
-	int	i;
+	int i;
+	
 	i = 0;
 	map->layout = malloc(sizeof(char *) * map->height);
 	if (!map->layout)
@@ -22,8 +23,16 @@ void	allocate_map(t_map *map, t_data *main)
 		main->type = 0;
 		error_message(main->type, main);
 	}
-	while (i < map->)
-	
+	while (i < map->height)
+	{
+		map->layout[i] = malloc(sizeof(char) * map->width);
+		if (!map->layout[i])
+		{
+			main->type = 0;
+			error_message(main->type, main);
+		}
+		i++;
+	}
 }
 
 void	get_w_h(char *file_path, t_map *map, int fd, t_data *main)
@@ -47,7 +56,7 @@ void	get_w_h(char *file_path, t_map *map, int fd, t_data *main)
 		{
 			if (buffer[i] == '\n')
 				map->height += 1;
-			else if (buffer[i] != ' ' && buffer[i] != '\t')
+			else if (map->height == 0 && buffer[i] != ' ' && buffer[i] != '\t')
 				map->width += 1;
 			i++;
 		}
@@ -67,7 +76,8 @@ void	fill_layout(char *file_path, t_map *map, t_data *main)
 	}
 	get_w_h(file_path, map, fd, main);
 	allocate_map(map, main);
-	
+	//Read from fd again and fill values
+	//Draw the map and the player
 }
 
 void    parse_map(t_data *main, t_map *map)
