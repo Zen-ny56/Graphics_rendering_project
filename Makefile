@@ -10,7 +10,7 @@ INCLUDE = -I
 EXIT_DIR = ./src/exit
 
 SRCS = ./src/main.c \
-		./src/parsing/validate_cmdline.c ./src/parsing/window_management.c \
+		./src/parsing/validate_cmdline.c ./src/parsing/window_management.c ./src/parsing/maptolayout.c ./src/parsing/fill_layout.c ./src/parsing/parsing_utils.c ./src/parsing/draw_map.c\
 		./src/exit/error.c ./src/exit/free.c\
 
 OBJS = $(SRCS:.c=.o)

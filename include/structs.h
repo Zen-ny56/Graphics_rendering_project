@@ -14,8 +14,14 @@ typedef struct s_window
 {
 	void	*mlx;
 	void	*window;
+	void 	*img;
+    char	 *addr;
+    int		bits_per_pixel;
+    int		line_len;
+    int		endian;
 	int		width;
 	int		height;
+	int		color;
 }              t_window;
 
 typedef struct s_parse

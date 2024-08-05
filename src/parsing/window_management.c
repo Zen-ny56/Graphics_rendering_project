@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:12:36 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/04 19:17:54 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/05 20:22:17 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	set_win_values(t_window *ups)
 		exit(1);
 	}
 	ups->window = NULL;
+	ups->addr = NULL;
 	ups->width = 800;
 	ups->height = 600;
 }
@@ -53,11 +54,13 @@ int handle_close(void *param)
 void	create_window(t_window *ups)
 {
 	ups->window = mlx_new_window(ups->mlx, ups->width, ups->height, "Mini-Map Window");
-	if (!ups->window)
-	{
-		printf("Failed to create the window\n");
-		exit(1);
-	}
+	ups->img = mlx_new_image(ups->mlx, ups->width, ups->height);
+	if (!ups->img)
+		printf("Error\n");
+	ups->addr = mlx_get_data_addr(ups->img, &ups->bits_per_pixel, &ups->line_len,
+		&ups->endian);
+	if (!ups->addr)
+		printf("Error\n");
 }
 
 void    manage_window(t_data *main)
@@ -70,7 +73,9 @@ void    manage_window(t_data *main)
 	}
 	set_win_values(main->window);
 	create_window(main->window);
-	parse_map(main, main->window);
+	parse_map(main);
+	draw_map(main);
+	mlx_put_image_to_window(main->window->mlx, main->window->window, main->window->img, 0, 0);
 	mlx_hook(main->window->window, 02, 1L << 0, keypress, main->window);
 	mlx_hook(main->window->window, 17, 1L << 0, handle_close, main->window);
 	mlx_loop(main->window->mlx);

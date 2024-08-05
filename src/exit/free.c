@@ -9,8 +9,30 @@ void    free_par(t_parse *parse)
 	}
 }
 
+void 	free_array(char **s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		s[i] = NULL;
+		i++;
+	}
+	free(s);
+}
+
+void	free_map(t_map *map)
+{
+	free_array(map->layout);
+	free(map);
+}
+
 void    free_and_exit(t_data *m, int num)
 {
+	if (m->map)
+		free_map(m->map);
 	if (m->parse)
 		free_par(m->parse);
 	if (m)

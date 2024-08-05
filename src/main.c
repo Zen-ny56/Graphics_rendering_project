@@ -7,10 +7,10 @@ int main(int ac, char **av)
 		return (printf("Wrong input. Usage (./Cub3d ./map/map.cub)\n"), 1);
 	t_data *main_struct;
 	main_struct = malloc(sizeof(t_data));
-	if (!main_struct)
+	if (!main_struct)                  
 		return (-1);
 	validate_cmdline(av, main_struct);
-	// manage_window(main_struct);
+ 	manage_window(main_struct);
 		// t_window *ups;
 		// ups = malloc(sizeof(t_window) * 1);
 		// if (!ups)
