@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:49:37 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/05 20:30:50 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/06 18:11:45 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	draw_map(t_data *main)
 		{
 			if (main->map->layout[y][x] == '1')
 			{
-				printf("%d\n" ,main->map->layout[y][x]);
+				printf("%c\n" ,main->map->layout[y][x]);
 				color = 0xFFFFFF;
 			}
 			else if (main->map->layout[y][x] == '0')
 			{
-				printf("%d\n" ,main->map->layout[y][x]);
+				printf("%c\n" ,main->map->layout[y][x]);
 				color = 0x000000;
 			}
 			else if (main->map->layout[y][x] == 'N' || main->map->layout[y][x] == 'S'
