@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:12:10 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/05 17:50:05 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/07 16:33:22 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ bool check_dir(char *arg)
 bool	check_file(t_parse *p)
 {
 	int len;
-	int i;
 	int fd;
 	
 	len = ft_strlen(p->file_path);
-	i = 0;
 	if (len < 4)
 		return (false);
 	if (p->file_path[len - 1] == 'b' && p->file_path[len - 2] == 'u' && p->file_path[len - 3] == 'c'
@@ -92,4 +90,5 @@ void	validate_cmdline(char **av,  t_data *m)
 		error_message(m->type, m);
 	}
 	check_input(av, m);
+	parse_map(m);
 }

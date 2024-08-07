@@ -24,11 +24,35 @@ typedef struct s_window
 	int		color;
 }              t_window;
 
-typedef struct s_parse
+typedef	struct s_texture
 {
-	char	*file_path;
-	char	*file;
-	char
+	char *no;
+	char *so;
+	char *we;
+	char *ea;
+}			t_texture;
+
+typedef struct s_color
+{
+	int	r;
+	int g;
+	int b;
+	int color;
+}			t_color;
+
+typedef struct s_point
+{
+	char	*row;
+	struct	s_point *next;
+}			t_point;
+
+typedef	struct s_parse
+{
+	char		*file_path;
+	char		*buf;
+	t_texture 	*texture;
+	t_color		*color;
+	t_point		*point;
 }				t_parse;
 
 typedef enum s_etype

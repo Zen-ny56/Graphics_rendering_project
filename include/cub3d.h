@@ -11,7 +11,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdint.h>
-
+# include <limits.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
