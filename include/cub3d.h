@@ -29,5 +29,7 @@ void    parse_map(t_data *main);
 void    maptolayout(char *file_path, t_map *map, t_data *main, int fd);
 void    init_map(t_map *map);
 void	draw_map(t_data *main);
+void	parse_texture(t_data *m, t_parse *p);
+bool    check_dir(char *arg);
 
 #endif

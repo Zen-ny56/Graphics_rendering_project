@@ -10,7 +10,7 @@ void    error_message(int type, t_data *m)
 		ft_putstr_fd("Invalid file entered\n", 2);
 	else if (type == 3)
 		ft_putstr_fd("Invalid texture\n", 2);
-	else if (type = 4)
+	else if (type == 4)
 		ft_putstr_fd("Texture missing\n", 2);
 	free_and_exit(m, 1);
 }

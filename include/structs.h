@@ -51,7 +51,7 @@ typedef	struct s_parse
 {
 	char		*file_path;
 	char		*buf;
-	char		*array;
+	char		**array;
 	t_texture 	*texture;
 	t_color		*color;
 	t_point		*point;

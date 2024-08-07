@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:08:08 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/07 20:44:02 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/07 21:39:15 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	parse_texture(t_data *m, t_parse *p)
 {
 	(void) m;
 	int 		i;
-	char **array;
 
 	i = -1;
 	p->texture = malloc(sizeof(t_texture) * 1);
@@ -114,7 +113,7 @@ void	parse_texture(t_data *m, t_parse *p)
 	if (!p->array || !p->texture)
 		error_message(0, m);
 	while (p->array[++i])
-		checkstrtexture(&p->array[i], p->texture, m);
+		checkstrtexture(p->array[i], p->texture, m);
 	if (!p->texture->no || !p->texture->so || !p->texture->we || !p->texture->ea)
 		error_message(4, m);
 }
