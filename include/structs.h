@@ -30,6 +30,7 @@ typedef	struct s_texture
 	char *so;
 	char *we;
 	char *ea;
+	char *buffer;
 }			t_texture;
 
 typedef struct s_color
@@ -50,6 +51,7 @@ typedef	struct s_parse
 {
 	char		*file_path;
 	char		*buf;
+	char		*array;
 	t_texture 	*texture;
 	t_color		*color;
 	t_point		*point;

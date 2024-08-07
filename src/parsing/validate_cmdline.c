@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:12:10 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/07 16:33:22 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/07 19:33:14 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool check_dir(char *arg)
 	return (false);
 }
 
-bool	check_file(t_parse *p)
+bool	check_cub(t_parse *p)
 {
 	int len;
 	int fd;
@@ -70,25 +70,16 @@ void	check_input(char **av, t_data *m)
 {
 	m->parse->file_path = ft_strdup(av[1]);
 	if (check_dir(m->parse->file_path) == true)
-	{
-		m->type = 1;
-		error_message(m->type, m);
-	}
-	if (check_file(m->parse) == false)
-	{
-		m->type = 2;
-		error_message(m->type, m);
-	}
+		error_message(1, m);
+	if (check_cub(m->parse) == false)
+		error_message(2, m);
 }
 
 void	validate_cmdline(char **av,  t_data *m)
 {
 	m->parse = malloc(sizeof(t_parse));
 	if (!m->parse)
-	{
-		m->type = MEM_ALLOC;
-		error_message(m->type, m);
-	}
+		error_message(0, m);
 	check_input(av, m);
 	parse_map(m);
 }
