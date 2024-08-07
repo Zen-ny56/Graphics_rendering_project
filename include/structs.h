@@ -28,8 +28,7 @@ typedef struct s_parse
 {
 	char	*file_path;
 	char	*file;
-	//Calculation of lengths
-	//Linked list of 
+	char
 }				t_parse;
 
 typedef enum s_etype
