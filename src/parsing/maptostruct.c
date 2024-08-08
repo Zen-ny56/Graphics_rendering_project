@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:46:35 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/07 20:39:49 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/08 11:17:22 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	read_file(int fd, t_parse *p, t_data *m)
 		if (rd_bytes == (size_t)(-1))
 			error_message(2, m);
 	}
-	p->buf[rd_bytes] = '\0';
+	p->buf[ft_strlen(p->buf)] = '\0';
 }
 
 void	maptostruct(t_data *m, t_parse *p)
@@ -43,6 +43,7 @@ void	parse_map(t_data *m)
 		|| read(fd, 0, 0) < 0)
 		error_message(2, m);
 	read_file(fd, m->parse, m);
+	// printf("%s\n", m->parse->buf);
 	close(fd);
 	maptostruct(m, m->parse);
 }

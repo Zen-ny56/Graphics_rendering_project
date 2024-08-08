@@ -31,5 +31,8 @@ void    init_map(t_map *map);
 void	draw_map(t_data *main);
 void	parse_texture(t_data *m, t_parse *p);
 bool    check_dir(char *arg);
+void    init_parse(t_parse *parse);
+void	init_texture(t_texture *t);
+void	init_main(t_data *m);
 
 #endif

@@ -9,6 +9,7 @@ int main(int ac, char **av)
 	main_struct = malloc(sizeof(t_data));
 	if (!main_struct)                  
 		return (-1);
+	init_main(main_struct);
 	validate_cmdline(av, main_struct);
  	// manage_window(main_struct);
 		// t_window *ups;

@@ -67,7 +67,6 @@ typedef enum s_etype
 
 typedef struct s_data
 {
-	t_etype 	type;	
 	t_parse		*parse;
 	t_map		*map;
 	t_window	*window;

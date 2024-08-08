@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:12:10 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/07 19:33:14 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/08 11:09:07 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ void	check_input(char **av, t_data *m)
 		error_message(1, m);
 	if (check_cub(m->parse) == false)
 		error_message(2, m);
-}
+} 
 
 void	validate_cmdline(char **av,  t_data *m)
 {
 	m->parse = malloc(sizeof(t_parse));
 	if (!m->parse)
 		error_message(0, m);
+	init_parse(m->parse);
 	check_input(av, m);
 	parse_map(m);
 }
