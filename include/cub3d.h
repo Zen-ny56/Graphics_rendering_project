@@ -34,5 +34,8 @@ bool    check_dir(char *arg);
 void    init_parse(t_parse *parse);
 void	init_texture(t_texture *t);
 void	init_main(t_data *m);
+void    parse_color(t_data *m, t_parse *p);
+void	init_color(t_color *c);
+void	store_color(char *s, t_color *c, t_data *m, int	k);
 
 #endif

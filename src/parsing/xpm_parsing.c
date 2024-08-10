@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:08:08 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/08 11:43:03 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/08 16:45:06 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	parse_texture(t_data *m, t_parse *p)
 		error_message(0, m);
 	while (p->array[++i])
 		checkstrtexture(p->array[i], p->texture, m);
-	// printf("NORTH %s\n SOUTH %s\n WEST %s\n EAST %s\n", p->texture->no, p->texture->so, p->texture->we, p->texture->ea);
 	if (!p->texture->no || !p->texture->so || !p->texture->we || !p->texture->ea)
 		error_message(4, m);
 }

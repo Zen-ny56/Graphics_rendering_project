@@ -30,15 +30,15 @@ typedef	struct s_texture
 	char *so;
 	char *we;
 	char *ea;
-	char *buffer;
 }			t_texture;
 
 typedef struct s_color
 {
-	int	r;
-	int g;
-	int b;
-	int color;
+	int	*r;
+	int *g;
+	int *b;
+	int	*argb;
+	int flag;
 }			t_color;
 
 typedef struct s_point
@@ -56,14 +56,6 @@ typedef	struct s_parse
 	t_color		*color;
 	t_point		*point;
 }				t_parse;
-
-typedef enum s_etype
-{
-	MEM_ALLOC,
-	DIRECTORY,
-	INVALID_FILE,
-}			t_etype;
-
 
 typedef struct s_data
 {

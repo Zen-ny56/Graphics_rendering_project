@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:46:35 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/08 11:17:22 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/08 16:35:06 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	read_file(int fd, t_parse *p, t_data *m)
 void	maptostruct(t_data *m, t_parse *p)
 {
 	parse_texture(m, p);
+	parse_color(m, p);
 }
 
 void	parse_map(t_data *m)
@@ -43,7 +44,6 @@ void	parse_map(t_data *m)
 		|| read(fd, 0, 0) < 0)
 		error_message(2, m);
 	read_file(fd, m->parse, m);
-	// printf("%s\n", m->parse->buf);
 	close(fd);
 	maptostruct(m, m->parse);
 }

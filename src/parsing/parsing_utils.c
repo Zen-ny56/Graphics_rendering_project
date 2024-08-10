@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:39:54 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/08 12:06:19 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/10 20:56:14 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@ void	init_texture(t_texture *t)
 	t->so = NULL;
 	t->we = NULL;
 	t->ea = NULL;
-	t->buffer = NULL;
+}
+
+void	init_color(t_color *c)
+{
+	c->g = NULL;
+	c->r = NULL;
+	c->b = NULL;
+	c->argb = NULL;
 }
 
 void	init_main(t_data *m)

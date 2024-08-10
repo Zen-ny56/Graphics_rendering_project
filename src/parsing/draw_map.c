@@ -6,12 +6,11 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 18:49:37 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/06 18:11:45 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/08 16:42:09 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {
