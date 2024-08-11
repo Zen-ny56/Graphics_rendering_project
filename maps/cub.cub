@@ -4,7 +4,7 @@ WE ./textures/gradient3.xpm
 EA ./textures/gradient4.xpm
 
 F 48,48,48
-C 0,0,0
+C 0,0, 0
 
 		1111111111111111111111111
 		1000000000110000001000001

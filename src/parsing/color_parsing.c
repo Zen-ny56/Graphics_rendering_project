@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 16:36:49 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/10 21:14:49 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/11 13:10:50 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	lastcheckcolor(t_color *c, t_data *m)
 {
 	if (c->b[0] < 0 || c->b[1] < 0 || c->g[0] < 0 || c->g[1] < 0
 		|| c->r[0] < 0 || c->r[1] < 0)
-		error_message(6, m);	
+		error_message(6, m);
+	if (!(c->b[0] > -1 && c->b[0] < 256))
+		error_message(6, m);
 }
 
 void	save_color(char *s, t_color *c, t_data *m)
@@ -35,11 +37,6 @@ void	save_color(char *s, t_color *c, t_data *m)
 		}
 		len--;
 	}
-	// while ((len - 1) > 0)
-	// {
-	// 	printf("%c", s[len - 1]);
-	// 	len--;
-	// }
 }
 
 void	checkcolors(char *s, t_color *c, t_data *m)
