@@ -38,5 +38,6 @@ void    parse_color(t_data *m, t_parse *p);
 void	init_color(t_color *c);
 void	store_color(char *s, t_color *c, t_data *m, int	k);
 void    parse_point(t_data *m, t_parse *p);
+void    pointolayout(t_data *main, t_parse *p, t_point *po);
 
 #endif

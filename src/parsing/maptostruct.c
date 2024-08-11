@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:46:35 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/11 14:53:12 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/11 16:44:58 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	parse_map(t_data *m)
 	read_file(fd, m->parse, m);
 	close(fd);
 	maptostruct(m, m->parse);
+	pointolayout(m, m->parse, m->parse->point);
 }
