@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/11 15:19:05 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/11 16:26:22 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,11 @@ void    parse_point(t_data *m, t_parse *p)
 	int i;
 
 	i = -1;
-	p->point = malloc(sizeof(t_point));
+	p->point = NULL;
 	while (p->array[++i])
 	{
 		if (!islineempty(p->array[i]) || !precheckinterference(p->array[i]))
 			continue;
 		fill_point(p->array[i], m, &(p->point));
-	}
-	while (p->point)
-	{
-		printf("%s\n", p->point->row);
-		p->point = p->point->next;
 	}
 }
