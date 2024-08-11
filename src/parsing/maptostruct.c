@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 15:46:35 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/08 16:35:06 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/11 14:53:12 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	maptostruct(t_data *m, t_parse *p)
 {
 	parse_texture(m, p);
 	parse_color(m, p);
+	parse_point(m, p);
 }
 
 void	parse_map(t_data *m)

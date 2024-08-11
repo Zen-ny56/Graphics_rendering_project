@@ -44,6 +44,7 @@ typedef struct s_color
 typedef struct s_point
 {
 	char	*row;
+	int		x_length;
 	struct	s_point *next;
 }			t_point;
 

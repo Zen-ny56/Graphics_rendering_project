@@ -15,6 +15,8 @@ void    error_message(int type, t_data *m)
 	else if (type == 5)
 		ft_putstr_fd("Invalid color\n", 2);
 	else if (type == 6)
-		ft_putstr_fd("Color is missing\n", 2);
+		ft_putstr_fd("Color is missing or Invalid color\n", 2);
+	else if (type == 7)
+		ft_putstr_fd("Invalid letter\n", 2);
 	free_and_exit(m, 1);
 }

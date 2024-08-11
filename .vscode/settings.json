@@ -4,6 +4,11 @@
         "algorithm": "c",
         "functional": "c",
         "memory": "c",
-        "streambuf": "c"
+        "streambuf": "c",
+        "__hash_table": "c",
+        "cmath": "c",
+        "complex": "c",
+        "locale": "c",
+        "type_traits": "c"
     }
 }
