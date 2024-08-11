@@ -18,5 +18,7 @@ void    error_message(int type, t_data *m)
 		ft_putstr_fd("Color is missing or Invalid color\n", 2);
 	else if (type == 7)
 		ft_putstr_fd("Invalid letter\n", 2);
+	else if (type == 8)
+		ft_putstr_fd("Error player position\n", 2);
 	free_and_exit(m, 1);
 }

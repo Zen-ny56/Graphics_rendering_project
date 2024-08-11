@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:39:54 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/10 20:56:14 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/11 18:57:05 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void    init_map(t_map *map)
 {
 	map->layout = NULL;
-	map->width = 0;
-	map->height = 0;
-	map->player_x = 0;
-	map->player_y = 0;
+	map->playerx = -1;
+	map->playery = -1;
 }
 
 void    init_parse(t_parse *parse)
