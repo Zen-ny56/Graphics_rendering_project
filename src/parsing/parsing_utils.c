@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:39:54 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/11 18:57:05 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/14 18:50:49 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void    init_parse(t_parse *parse)
 {
 	parse->array = NULL;
 	parse->file_path = NULL;
+	parse->encountered = -1;
 	parse->buf = NULL;
 	parse->array = NULL;
 	parse->texture = NULL;

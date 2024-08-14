@@ -20,5 +20,7 @@ void    error_message(int type, t_data *m)
 		ft_putstr_fd("Invalid letter\n", 2);
 	else if (type == 8)
 		ft_putstr_fd("Error player position\n", 2);
+	else if (type == 9)
+		ft_putstr_fd("Map element has to be last and empty line can't be in between\n", 2);
 	free_and_exit(m, 1);
 }

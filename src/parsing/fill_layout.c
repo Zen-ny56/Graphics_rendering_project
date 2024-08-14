@@ -6,11 +6,17 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:01:52 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/11 19:10:18 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/14 20:39:36 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+// void	fill(char **tab, t_point )
+void	checkboundaries(t_data *m, t_map *map, t_point *point)
+{
+	fill(map->layout, map->layout[map->playery][map->playerx], );
+}
 
 void    setplayerposition(int y, t_map *map, t_data *m)
 {

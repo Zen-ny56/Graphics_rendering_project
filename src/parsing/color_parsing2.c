@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:16:42 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/11 13:26:36 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/12 18:31:29 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	store_color(char *s, t_color *c, t_data *m, int	k)
 
 	i = 0;
 	i++;
-	// printf("%s\n", &s[i]);
 	num = ft_atoi(&s[i]);
 	if (num > -1 && num < 256)
 	{

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/11 16:40:00 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/14 20:00:22 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int	islineempty(const char *line)
 
 int	precheckinterference(char *s)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	if (strncmp(&s[i], "NO", 2) == 0 || strncmp(&s[i], "SO", 2) == 0 ||
 		strncmp(&s[i], "WE", 2) == 0 || strncmp(&s[i], "EA", 2) == 0 ||
 		strncmp(&s[i], "F", 1) == 0 || strncmp(&s[i], "C", 1) == 0)
@@ -43,9 +45,7 @@ void	add_point_to_list(t_point **head, t_point *new_point)
 	t_point	*temp;
 
 	if (!*head)
-	{
-		*head = new_point;
-	}
+		*head = new_point; 
 	else
 	{
 		temp = *head;
@@ -62,10 +62,9 @@ void	lastcheckpoint(char *s, t_data *m)
 	i = -1;
 	while (s[++i])
 	{
-		if (s[i] != ' ' && s[i] != '\t' && s[i] != '0' && s[i] != '1'
-			&& s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'E')
+		if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'E')
 			error_message(7, m);
-	}	
+	}
 }
 
 char	*processtring(char *s)
@@ -79,8 +78,8 @@ char	*processtring(char *s)
 	len = 0;
 	while (s[++i])
 	{
-		if (s[i] == ' ' || s[i] == '\t')
-			continue ;
+		if (s[i] == ' ')
+			s[i] = '0';
 		len++;
 	}
 	b = malloc(sizeof(char) * len + 1);
@@ -88,8 +87,6 @@ char	*processtring(char *s)
 	j = 0;
 	while (s[++i])
 	{
-		if (s[i] == ' ' || s[i] == '\t')
-			continue;
 		b[j] = s[i];
 		j++;
 	}
@@ -97,10 +94,11 @@ char	*processtring(char *s)
 	return (b);
 }
 
-void	fill_point(char *s, t_data *m, t_point **head)
+void	fill_point(char *s, t_data *m, t_parse *p, t_point **head)
 {
 	t_point	*new;
 
+	p->encountered = 1;
 	new = (t_point *)malloc(sizeof(t_point));
 	new->row = processtring(s);
 	new->x_length = ft_strlen(new->row);
@@ -118,7 +116,11 @@ void    parse_point(t_data *m, t_parse *p)
 	while (p->array[++i])
 	{
 		if (!islineempty(p->array[i]) || !precheckinterference(p->array[i]))
+		{
+			if (p->encountered == 1)
+				error_message(9, m);
 			continue;
-		fill_point(p->array[i], m, &(p->point));
+		}
+		fill_point(p->array[i], m, p, &(p->point));
 	}
 }
