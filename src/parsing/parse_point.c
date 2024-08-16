@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/14 20:00:22 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/16 17:17:43 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,41 +67,48 @@ void	lastcheckpoint(char *s, t_data *m)
 	}
 }
 
-char	*processtring(char *s)
+char	*processtring(char *s, t_parse *p, int rows)
 {
-	int		i;
-	int		len;
-	char	*b;
+	int	i;
+	char *b;
 	int		j;
 
 	i = -1;
-	len = 0;
-	while (s[++i])
-	{
-		if (s[i] == ' ')
-			s[i] = '0';
-		len++;
-	}
-	b = malloc(sizeof(char) * len + 1);
-	i = -1;
 	j = 0;
+	b = malloc(sizeof(char) * p->max + 1);
 	while (s[++i])
 	{
-		b[j] = s[i];
-		j++;
+		if (rows == 0 || (rows  == p->rows - 1))
+		{
+			if (s[i] == ' ')
+				b[j++] = '1'; 
+		}
+		if (s[i] == ' ' && i == 0 && rows != 0)
+			b[j++] = '1';
+		if (s[i] == ' ' && i > 0)
+			b[j++] = '0';
+		if (s[i] == '1' || s[i] == '0' || s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
+			b[j++] = s[i];
 	}
-	b[j] = '\0';
+	while (j < p->max)
+	{
+		if (rows == 0 || (rows == p->rows - 1))
+			b[j++] = '1';
+		else
+			b[j++] = '0';
+	}
+	b[j] = '1';
+	b[j + 1] = '\0';
 	return (b);
 }
 
-void	fill_point(char *s, t_data *m, t_parse *p, t_point **head)
+void	fill_point(char *s, t_data *m, int rows, t_point **head)
 {
-	t_point	*new;
-
-	p->encountered = 1;
+	t_point		*new;
+  
+	m->parse->encountered = 1;
 	new = (t_point *)malloc(sizeof(t_point));
-	new->row = processtring(s);
-	new->x_length = ft_strlen(new->row);
+	new->row = processtring(s, m->parse, rows);
 	new->next = NULL;
 	lastcheckpoint(new->row, m);
 	add_point_to_list(head, new);
@@ -110,9 +117,13 @@ void	fill_point(char *s, t_data *m, t_parse *p, t_point **head)
 void    parse_point(t_data *m, t_parse *p)
 {
 	int i;
+	int	rows;
 
 	i = -1;
+	rows = 0;
 	p->point = NULL;
+	find_max(p);
+	count_rows(p);
 	while (p->array[++i])
 	{
 		if (!islineempty(p->array[i]) || !precheckinterference(p->array[i]))
@@ -121,6 +132,12 @@ void    parse_point(t_data *m, t_parse *p)
 				error_message(9, m);
 			continue;
 		}
-		fill_point(p->array[i], m, p, &(p->point));
+		fill_point(p->array[i], m, rows, &(p->point));
+		rows++;
+	}
+	while (p->point)
+	{
+		printf("%s\n", p->point->row);
+		p->point = p->point->next;
 	}
 }

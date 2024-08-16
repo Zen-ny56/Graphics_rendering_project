@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:39:54 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/14 18:50:49 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/16 16:07:24 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void    init_map(t_map *map)
 {
 	map->layout = NULL;
-	map->playerx = -1;
-	map->playery = -1;
+	map->py = -1;
+	map->px = -1;
 }
 
 void    init_parse(t_parse *parse)
 {
 	parse->array = NULL;
 	parse->file_path = NULL;
+	parse->max = -1;
 	parse->encountered = -1;
 	parse->buf = NULL;
 	parse->array = NULL;

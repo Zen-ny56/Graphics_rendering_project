@@ -4,9 +4,9 @@
 typedef struct s_map
 {
 	char	**layout;
-	int		playerx;
-	int		playery;
-	int		height
+	int		px;
+	int		py;
+	int		height;
 }			t_map;
 
 typedef struct s_window
@@ -53,6 +53,8 @@ typedef	struct s_parse
 	char		*buf;
 	char		**array;
 	int			encountered;
+	int			max;
+	int			rows;
 	t_texture 	*texture;
 	t_color		*color;
 	t_point		*point;

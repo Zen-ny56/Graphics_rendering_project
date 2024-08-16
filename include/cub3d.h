@@ -40,5 +40,10 @@ void	store_color(char *s, t_color *c, t_data *m, int	k);
 void    parse_point(t_data *m, t_parse *p);
 void    pointolayout(t_data *main, t_parse *p, t_point *po);
 void    setplayerposition(int y, t_map *map, t_data *m);
+int     setmaxwidth(t_parse *p);
+void    find_max(t_parse *p);
+int	    islineempty(const char *line);
+int	    precheckinterference(char *s);
+void	count_rows(t_parse *p);
 
 #endif
