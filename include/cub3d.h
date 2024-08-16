@@ -45,5 +45,7 @@ void    find_max(t_parse *p);
 int	    islineempty(const char *line);
 int	    precheckinterference(char *s);
 void	count_rows(t_parse *p);
+void	checkboundaries(t_data *m, t_cur *cur, t_map *map);
+void	add_coordinatestruct(char **layout, t_data *m, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/16 16:53:28 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/16 19:07:17 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void    pointolayout(t_data *m, t_parse *p, t_point *po)
 	m->map = malloc(sizeof(t_map));
 	init_map(m->map);
 	allocateheight(y, m->map, m);
-	// find_max(y, m->map, m);
 	allowidtheight(y, m->map, &(p->point), m);
 	fill_layout(y, m->map, &(p->point), m);
 	setplayerposition(y, m->map, m);
-	// checkboundaries(m, m->map);
+	add_coordinatestruct(m->map->layout, m, y);
+	// checkboundaries(m, m->cur, m->map);
 }

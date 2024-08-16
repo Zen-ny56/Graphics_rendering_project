@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/16 17:17:43 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/16 19:06:13 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	fill_point(char *s, t_data *m, int rows, t_point **head)
   
 	m->parse->encountered = 1;
 	new = (t_point *)malloc(sizeof(t_point));
+	new->x_length = m->parse->max;
 	new->row = processtring(s, m->parse, rows);
 	new->next = NULL;
 	lastcheckpoint(new->row, m);
@@ -135,9 +136,5 @@ void    parse_point(t_data *m, t_parse *p)
 		fill_point(p->array[i], m, rows, &(p->point));
 		rows++;
 	}
-	while (p->point)
-	{
-		printf("%s\n", p->point->row);
-		p->point = p->point->next;
-	}
+	printf("%d\n", p->rows);
 }

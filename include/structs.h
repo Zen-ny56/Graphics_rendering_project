@@ -9,6 +9,12 @@ typedef struct s_map
 	int		height;
 }			t_map;
 
+typedef struct	s_cur
+{
+	int x;
+	int y;
+} 			t_cur;
+
 typedef struct s_window
 {
 	void	*mlx;
@@ -65,6 +71,7 @@ typedef struct s_data
 	t_parse		*parse;
 	t_map		*map;
 	t_window	*window;
+	t_cur		*cur;
 }				t_data;
 
 #endif
