@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/16 19:07:17 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/17 20:31:45 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,5 @@ void    pointolayout(t_data *m, t_parse *p, t_point *po)
 	fill_layout(y, m->map, &(p->point), m);
 	setplayerposition(y, m->map, m);
 	add_coordinatestruct(m->map->layout, m, y);
-	// checkboundaries(m, m->cur, m->map);
+	checkboundaries(m, m->cur, m->map);
 }

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:01:52 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/16 19:22:37 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/17 21:11:19 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	fill(char **tab, t_cur *size, t_cur *cur, int *enclosed)
 {
-	if (cur->y < 0 || cur->y >= size->y || cur->x < 0 || cur->x >= size->x)
+	printf("{%c} \n", tab[cur->y][cur->x]);
+	if (cur->y <= 0 || cur->y >= size->y || cur->x <= 0 || cur->x >= size->x)
+	{
+		if (tab[cur->y][cur->x] == '0')
+		{
+			*enclosed = 0;
+		}
+		return ;
+	}
 	if (tab[cur->y][cur->x] == '1' || tab[cur->y][cur->x] == 'F')
-		return; // Skip walls and already filled areas
-	if (tab[cur->y][cur->x] != '0')
 		return;
 	tab[cur->y][cur->x] = 'F';
 	fill(tab, size, &(t_cur){cur->x - 1, cur->y}, enclosed);
@@ -28,19 +34,22 @@ void	fill(char **tab, t_cur *size, t_cur *cur, int *enclosed)
 
 void	checkboundaries(t_data *m, t_cur *cur, t_map *map)
 {
-	t_cur	*begin;
-	t_cur	*size;
-	int		*enclosed;
+	(void)cur;
+	t_cur	begin;
+	t_cur	size;
+	int		enclosed;
 
-	begin = cur;
-	size = cur;
-	begin->x = map->px;
-	begin->y = map->py;
-	size->x = m->parse->max;
-	size->y = m->parse->rows;
-	if (begin->x <= 0 || begin->x >= size->y || begin->x >= size->x || begin->y <= 0)
+	enclosed = 1;
+	begin.x = map->px;
+	begin.y = map->py;
+	size.x = m->parse->max;
+	size.y = m->parse->rows;
+	// printf("Players starting coordinate x{%d}y{%d} and boundaries x{%d} y{%d}\n", begin.x, begin.y, size.x, size.y);
+	if (begin.x <= 0 || begin.y >= size.y || begin.x >= size.x || begin.y <= 0)
 		error_message(10, m);
-	flood_fill(map->layout, size, begin, enclosed);
+	fill(map->layout, &size, &begin, &enclosed);
+	if (enclosed != 1)
+		error_message(10, m);
 }
 
 void	add_coordinatestruct(char **layout, t_data *m, int y)
