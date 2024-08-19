@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/17 20:31:45 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/19 19:32:26 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	fill_layout(int y, t_map *map, t_point **head, t_data *m)
 	while (y < max)
 	{
 		strcpy(map->layout[y], temp->row);
+		// printf("%d %s\n", y, map->layout[y]);
 		y++;
 		temp = temp->next;
 	}
@@ -89,5 +90,16 @@ void    pointolayout(t_data *m, t_parse *p, t_point *po)
 	fill_layout(y, m->map, &(p->point), m);
 	setplayerposition(y, m->map, m);
 	add_coordinatestruct(m->map->layout, m, y);
+	// m->cur->y = 0;
+	// while (m->map->layout[m->cur->y])
+	// {
+	// 	m->cur->x = 0;
+	// 	while (m->map->layout[m->cur->y][m->cur->x])
+	// 	{
+	// 		printf("{%d}{%d} %c\n", m->cur->y, m->cur->x, m->map->layout[m->cur->y][m->cur->x]);
+	// 		m->cur->x++;
+	// 	}
+	// 	m->cur->y++;
+	// }
 	checkboundaries(m, m->cur, m->map);
 }

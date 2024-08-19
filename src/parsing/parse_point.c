@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/16 19:06:13 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/19 20:14:27 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	lastcheckpoint(char *s, t_data *m)
 	}
 }
 
-char	*processtring(char *s, t_parse *p, int rows)
+char	*processtring(char *s, t_parse *p, int rows, t_data *m)
 {
 	int	i;
 	char *b;
@@ -90,6 +90,8 @@ char	*processtring(char *s, t_parse *p, int rows)
 		if (s[i] == '1' || s[i] == '0' || s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
 			b[j++] = s[i];
 	}
+	if (b[j - 1] == '0')
+		error_message(10, m);
 	while (j < p->max)
 	{
 		if (rows == 0 || (rows == p->rows - 1))
@@ -109,7 +111,7 @@ void	fill_point(char *s, t_data *m, int rows, t_point **head)
 	m->parse->encountered = 1;
 	new = (t_point *)malloc(sizeof(t_point));
 	new->x_length = m->parse->max;
-	new->row = processtring(s, m->parse, rows);
+	new->row = processtring(s, m->parse, rows, m);
 	new->next = NULL;
 	lastcheckpoint(new->row, m);
 	add_point_to_list(head, new);
@@ -136,5 +138,5 @@ void    parse_point(t_data *m, t_parse *p)
 		fill_point(p->array[i], m, rows, &(p->point));
 		rows++;
 	}
-	printf("%d\n", p->rows);
+	// printf("%d\n", p->rows);
 }
