@@ -47,5 +47,7 @@ int	    precheckinterference(char *s);
 void	count_rows(t_parse *p);
 void	checkboundaries(t_data *m, t_cur *cur, t_map *map);
 void	add_coordinatestruct(char **layout, t_data *m, int y);
+void    execution(t_data *main);
+void    draw_minimap(t_data *m);
 
 #endif
