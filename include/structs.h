@@ -20,7 +20,7 @@ typedef struct s_window
 	void	*mlx;
 	void	*window;
 	void 	*img;
-    char	 *addr;
+    char	*addr;
     int		bits_per_pixel;
     int		line_len;
     int		endian;
