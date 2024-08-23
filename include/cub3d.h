@@ -5,7 +5,7 @@
 # define BUFFER_SIZE 1000
 #endif
 
-#define GAP_SIZE 0.3
+#define GAP_SIZE 1
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"
