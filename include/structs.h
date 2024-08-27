@@ -53,6 +53,23 @@ typedef struct s_point
 	struct	s_point *next;
 }			t_point;
 
+typedef	struct s_player
+{
+	double pos_x;
+	double pos_y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
+	double cameraX;
+	double raydir_x;
+	double raydir_y;
+	double sideDistX;
+	double sideDistX;
+	double deltaDistX;
+	double deltaDistY;
+}		t_player;
+
 typedef	struct s_parse
 {
 	char		*file_path;
@@ -72,6 +89,7 @@ typedef struct s_data
 	t_map		*map;
 	t_window	*window;
 	t_cur		*cur;
+	t_player	*player;
 }				t_data;
 
 #endif

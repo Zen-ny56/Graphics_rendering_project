@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:39:57 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/23 17:37:10 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/27 18:54:35 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p, int tile_size)
 				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x000000, tile_size);
 			else if (map->layout[cur->y][cur->x] == 'N' || map->layout[cur->y][cur->x] == 'S' || map->layout[cur->y][cur->x] == 'E'
 				|| map->layout[cur->y][cur->x] == 'W')
-				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x00FFFF, tile_size);
+				draw_pla(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x00FFFF, tile_size);
 			 cur->x++;
 		}
 		cur->y++;
