@@ -59,13 +59,14 @@ typedef	struct s_player
 	double pos_y;
 	double dir_x;
 	double dir_y;
+	double angle;
 	double plane_x;
 	double plane_y;
 	double cameraX;
 	double raydir_x;
 	double raydir_y;
 	double sideDistX;
-	double sideDistX;
+	double sideDistY;
 	double deltaDistX;
 	double deltaDistY;
 }		t_player;

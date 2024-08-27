@@ -13,7 +13,7 @@ SRCS = ./src/main.c \
 		./src/parsing/validate_cmdline.c ./src/parsing/window_management.c ./src/parsing/maptolayout.c ./src/parsing/fill_layout.c ./src/parsing/parsing_utils.c ./src/parsing/draw_map.c\
 		./src/parsing/maptostruct.c ./src/parsing/xpm_parsing.c ./src/parsing/color_parsing.c ./src/parsing/color_parsing2.c\
 		./src/parsing/parse_point.c ./src/parsing/initial_check.c\
-		./src/execution/execution.c ./src/execution/drawminimap.c\
+		./src/execution/execution.c ./src/execution/drawminimap.c ./src/execution/mark_player.c\
 		./src/exit/error.c ./src/exit/free.c\
 
 OBJS = $(SRCS:.c=.o)

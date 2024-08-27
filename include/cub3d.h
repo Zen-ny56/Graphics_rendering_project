@@ -7,6 +7,8 @@
 
 #define GAP_SIZE 1
 
+#define PI 3.14159265358979323846
+
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 # include "structs.h"
@@ -51,5 +53,7 @@ void	checkboundaries(t_data *m, t_cur *cur, t_map *map);
 void	add_coordinatestruct(char **layout, t_data *m, int y);
 void    execution(t_data *main);
 void    draw_minimap(t_data *m);
+void    mark_player(t_data *data, int x, int y);
+void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 
 #endif
