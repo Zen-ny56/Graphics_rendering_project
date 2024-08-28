@@ -53,7 +53,8 @@ void	checkboundaries(t_data *m, t_cur *cur, t_map *map);
 void	add_coordinatestruct(char **layout, t_data *m, int y);
 void    execution(t_data *main);
 void    draw_minimap(t_data *m);
-void    mark_player(t_data *data, int x, int y);
+void    mark_player(t_data *data, int x, int y, int tile);
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
+void    draw_player(t_window *w, t_player *player, int tile_size);
 
 #endif

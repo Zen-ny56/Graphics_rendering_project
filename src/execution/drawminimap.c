@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:39:57 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/27 20:43:54 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/28 14:51:21 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p, int tile_size)
 				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x000000, tile_size);
 			else if (map->layout[cur->y][cur->x] == 'N' || map->layout[cur->y][cur->x] == 'S' || map->layout[cur->y][cur->x] == 'E'
 				|| map->layout[cur->y][cur->x] == 'W')
-				//
+			{
+				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x000000, tile_size);
+				mark_player(m, cur->x, cur->y, tile_size);
+			}
 			cur->x++;
 		}
 		cur->y++;
@@ -95,6 +98,7 @@ void    draw_minimap(t_data *m)
 	else
 		tile_size = j;
 	draw(m, m->map, m->cur, m->parse, tile_size);
+	draw_player(m->window, m->player, tile_size);
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);
 	mlx_loop(m->window->mlx);
 }

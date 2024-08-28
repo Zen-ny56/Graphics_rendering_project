@@ -6,13 +6,45 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 19:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/27 20:43:27 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/28 14:50:29 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void    mark_player(t_data *data, int x, int y)
+void draw_circle(t_window *w, int center_x, int center_y, int radius, int color)
+{
+	int x;
+	int	y;
+	int radius_squared;
+
+	radius_squared = radius * radius;
+	y = -radius;
+	// Iterate over a square bounding box around the circle's center
+	while (y <= radius)
+    {
+		x = -radius;
+        while (x <= radius)
+        {
+			if ((x * x) + (y * y) <= radius_squared)
+				my_mlx_pixel_put(w, center_x + x, center_y + y, color);
+			x++;
+        }
+		y++;
+    }
+}
+
+void draw_player(t_window *w, t_player *player, int tile_size)
+{
+    int radius;// Adjust size to make the player smaller on the map
+
+	radius = tile_size / 4;
+
+    // Draw the player's square, centered at (x, y)
+    draw_circle(w, (int)player->pos_x, (int)player->pos_y, radius, 0xFF0000);
+}
+
+void    mark_player(t_data *data, int x, int y, int tile_size)
 {
 	int player_size;
 	int color;
@@ -20,8 +52,8 @@ void    mark_player(t_data *data, int x, int y)
 	player_size = 1;
 	color = 0xFF0000;
 	data->player = malloc(sizeof(t_player));
-	data->player->pos_x = x * 64.00 + 32.00;
-	data->player->pos_y = y * 64.00 + 32.00;
+ 	data->player->pos_x = (x * tile_size) + (tile_size / 2.0); // Pixel x-axis 
+    data->player->pos_y = (y * tile_size) + (tile_size / 2.0); // Pixel y-axis
 	if (data->map->layout[y][x] == 'E')
 		data->player->angle = 0;
 	if (data->map->layout[y][x] == 'N')
@@ -31,5 +63,4 @@ void    mark_player(t_data *data, int x, int y)
 	else if (data->map->layout[y][x] == 'S')
 		data->player->angle = 3 * PI / 2;
 	data->map->layout[y][x] = '0';
-	draw_player(data, data->window, player_size, color);	
 }
