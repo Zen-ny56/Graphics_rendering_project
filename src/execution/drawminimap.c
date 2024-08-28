@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:39:57 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/28 14:51:21 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/28 18:36:57 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void    draw_minimap(t_data *m)
 	draw(m, m->map, m->cur, m->parse, tile_size);
 	draw_player(m->window, m->player, tile_size);
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);
-	mlx_loop(m->window->mlx);
+	mlx_hook(m->window->window, 02, 1L << 0, keypress, m->window);
+	mlx_hook(m->window->window, 17, 1L << 0, exit_window, m->window);
 }

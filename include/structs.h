@@ -60,6 +60,7 @@ typedef	struct s_player
 	double dir_x;
 	double dir_y;
 	double angle;
+	double plane_length;
 	double plane_x;
 	double plane_y;
 	double cameraX;

@@ -6,8 +6,9 @@
 #endif
 
 #define GAP_SIZE 1
-
+#define MOVE_SPEED 2.0
 #define PI 3.14159265358979323846
+#define FOV (PI / 3)
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"
@@ -37,9 +38,10 @@ void	parse_texture(t_data *m, t_parse *p);
 bool    check_dir(char *arg);
 void    init_parse(t_parse *parse);
 void	init_texture(t_texture *t);
+void    init_color(t_color *c);
 void	init_main(t_data *m);
 void    parse_color(t_data *m, t_parse *p);
-void	init_color(t_color *c);
+void	color(t_color *c);
 void	store_color(char *s, t_color *c, t_data *m, int	k);
 void    parse_point(t_data *m, t_parse *p);
 void    pointolayout(t_data *main, t_parse *p, t_point *po);
@@ -56,5 +58,7 @@ void    draw_minimap(t_data *m);
 void    mark_player(t_data *data, int x, int y, int tile);
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 void    draw_player(t_window *w, t_player *player, int tile_size);
+int     keypress(int keycode, t_window *win, t_data *m);
+int     exit_window(t_window *win);
 
 #endif

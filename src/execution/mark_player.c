@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 19:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/28 14:50:29 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/28 15:28:13 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void draw_circle(t_window *w, int center_x, int center_y, int radius, int color)
 
 	radius_squared = radius * radius;
 	y = -radius;
-	// Iterate over a square bounding box around the circle's center
 	while (y <= radius)
     {
 		x = -radius;
@@ -36,11 +35,9 @@ void draw_circle(t_window *w, int center_x, int center_y, int radius, int color)
 
 void draw_player(t_window *w, t_player *player, int tile_size)
 {
-    int radius;// Adjust size to make the player smaller on the map
+    int radius;
 
 	radius = tile_size / 4;
-
-    // Draw the player's square, centered at (x, y)
     draw_circle(w, (int)player->pos_x, (int)player->pos_y, radius, 0xFF0000);
 }
 
@@ -52,8 +49,8 @@ void    mark_player(t_data *data, int x, int y, int tile_size)
 	player_size = 1;
 	color = 0xFF0000;
 	data->player = malloc(sizeof(t_player));
- 	data->player->pos_x = (x * tile_size) + (tile_size / 2.0); // Pixel x-axis 
-    data->player->pos_y = (y * tile_size) + (tile_size / 2.0); // Pixel y-axis
+ 	data->player->pos_x = (x * tile_size) + (tile_size / 2.0);
+    data->player->pos_y = (y * tile_size) + (tile_size / 2.0);
 	if (data->map->layout[y][x] == 'E')
 		data->player->angle = 0;
 	if (data->map->layout[y][x] == 'N')
