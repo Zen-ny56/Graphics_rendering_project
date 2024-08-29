@@ -6,15 +6,28 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/28 18:49:01 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/29 18:26:26 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	basic_movement(int keycode, t_player *player)
+void	redraw(t_data *m)
 {
-	if (keycode == 13)
+	mlx_clear_window(m->window->mlx, m->window->window);
+	set_tilesize(m->parse);
+	draw(m, m->map, m->cur, m->parse);
+	draw_player(m->window, m->player, m->parse->tile_size);
+	raycasting(m);
+	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);	
+}
+
+int	basic_movement(int keycode, t_player *player, t_data *m)
+{	
+	// printf("%f\n", player->pos_x);
+	// printf("%f\n", player->pos_y);
+	// printf("aaa\n");
+	if (keycode == 1)
 	{	
 		player->pos_x += player->dir_x * MOVE_SPEED;
 		player->pos_y += player->dir_y * MOVE_SPEED;
@@ -24,7 +37,7 @@ int	basic_movement(int keycode, t_player *player)
 		player->pos_x -= player->dir_y * MOVE_SPEED;
 		player->pos_y += player->dir_x * MOVE_SPEED;
 	}
-	else if (keycode == 1)
+	else if (keycode == 13)
 	{
 		player->pos_x -= player->dir_x * MOVE_SPEED;
 		player->pos_y -= player->dir_y * MOVE_SPEED;
@@ -34,40 +47,64 @@ int	basic_movement(int keycode, t_player *player)
 		player->pos_x += player->dir_y * MOVE_SPEED;
 		player->pos_y -= player->dir_x * MOVE_SPEED;
 	}
-	//Call draw player function
-	//Add tile_size to parsing structure
+	//Call redraw_function
+	redraw(m);
+	return (0);
 }
 
-int exit_window(t_window *win)
+int exit_window(t_data *m) // Exit window
 {
-	mlx_clear_window(win->mlx, win->window);
-	mlx_destroy_window(win->mlx, win->window);
+	mlx_clear_window(m->window->mlx, m->window->window);
+	mlx_destroy_window(m->window->mlx, m->window->window);
+	//Free memory
 	exit(0);
 	ft_putstr_fd("Window exited\n", 1);
 	return (0);
 }
 
-void	rotate(int keycode, t_player *player, double angle)
+void	change_plane(t_player *player, double angle) // Change the camera plane
 {
-	double old_dir_x = player->dir_x;
-	double cos_theta = cos(angle);
-	double sin_theta = sin(angle);
-	player->dir_x = player->dir_x * cos_theta - player->dir_y * sin_theta;
-	player->dir_y = old_dir_x * sin_theta + player->dir_y * cos_theta;
+	double old_plane_x;
+
+	old_plane_x = player->plane_x;
+    player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
+    player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
 }
-int	keypress(int keycode, t_window *win, t_data *m)
+
+void	change_direction(t_player *player, double angle) // Direction of the player has been changed
 {
-	(void)m;
+	double old_dir_x;
+
+	old_dir_x = player->dir_x;
+    player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
+    player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos(angle);
+}
+
+void	rotate(t_player *player, double angle, t_data *m) // Handle rotation
+{
+	change_direction(player, angle);
+	change_plane(player, angle);
+	redraw(m);
+}
+
+int	keypress(int keycode, t_data *m)
+{
 	if (keycode== 53)
 	{
-		if (!exit_window(win))
+		if (!exit_window(m))
 			exit(0);
 	}
+	// printf("Here\n");
+	// printf("%p Window pointer\n", m->window);
+	// printf("%p Parse pointer\n", m->parse);
+	// printf("%p Player pointer\n", m->player);
+	// printf("%f %f\n", m->player->dir_x, m->player->dir_y);
+	// printf("%f %f\n", m->player->pos_x, m->player->pos_y);
 	if ((keycode >= 0 && keycode <= 2) || keycode == 13)
-		basic_movement(keycode, m->player);
+		basic_movement(keycode, m->player, m);
 	if (keycode == 123)
-		rotate(keycode, m->player, PI / 12);
+		rotate(m->player, PI / 12, m);
 	if (keycode == 124)
-		rotate(keycode, m->player, (-1) * (PI / 12));
+		rotate(m->player, (-1) * (PI / 12), m);
 	return (0);
 }

@@ -60,6 +60,8 @@ typedef	struct s_player
 	double dir_x;
 	double dir_y;
 	double angle;
+	double pixel_width;
+	double pixel_height;
 	double plane_length;
 	double plane_x;
 	double plane_y;
@@ -77,6 +79,7 @@ typedef	struct s_parse
 	char		*file_path;
 	char		*buf;
 	char		**array;
+	int			tile_size;
 	int			encountered;
 	int			max;
 	int			rows;

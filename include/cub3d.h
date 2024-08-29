@@ -6,9 +6,11 @@
 #endif
 
 #define GAP_SIZE 1
-#define MOVE_SPEED 2.0
+#define MOVE_SPEED 2.5
 #define PI 3.14159265358979323846
 #define FOV (PI / 3)
+#define M_WIDTH 600
+#define M_HEIGHT 600
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"
@@ -55,10 +57,13 @@ void	checkboundaries(t_data *m, t_cur *cur, t_map *map);
 void	add_coordinatestruct(char **layout, t_data *m, int y);
 void    execution(t_data *main);
 void    draw_minimap(t_data *m);
-void    mark_player(t_data *data, int x, int y, int tile);
+void    mark_player(t_data *data, int x, int y, t_parse *p);
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 void    draw_player(t_window *w, t_player *player, int tile_size);
-int     keypress(int keycode, t_window *win, t_data *m);
-int     exit_window(t_window *win);
-
+int     keypress(int keycode, t_data *m);
+int     exit_window(t_data *m);
+void    draw_grid(t_data *m);
+void	raycasting(t_data *main);
+void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p);
+void	set_tilesize(t_parse *parse);
 #endif

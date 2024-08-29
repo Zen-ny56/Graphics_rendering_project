@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:39:57 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/28 18:36:57 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/29 18:28:11 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,34 @@ void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void draw_square(t_window *w, int x, int y, int color, int tile_size)
+void draw_square(t_window *w, t_cur *cur, t_parse *p, int color) // Will norminette this
 {
-    int i;
-	int	j;
-
-	i = 0;
-    while (i < tile_size)
+    int i, j;
+    int x, y;
+    x = (cur->x * p->tile_size) + 1;
+    y = (cur->y * p->tile_size) + 1;
+    // Draw the tile
+    for (i = 0; i < p->tile_size; i++)
     {
-		j = 0;
-        while (j < tile_size)
+        for (j = 0; j < p->tile_size; j++)
         {
-            my_mlx_pixel_put(w, x + j / 1.10, y + i / 1.10, color);
-			j++;
-		}
-		i++;
+            my_mlx_pixel_put(w, x + j, y + i, color);
+        }
+    }
+	// Draw the border (optional, adjust thickness if needed)
+    for (i = 0; i < p->tile_size; i++)
+    {
+        // Top border
+        my_mlx_pixel_put(w, x + i, y, 0x000000);
+        // Bottom border
+        my_mlx_pixel_put(w, x + i, y + p->tile_size - 1, 0x000000);
+    }
+    for (j = 0; j < p->tile_size; j++)
+    {
+        // Left border
+        my_mlx_pixel_put(w, x, y + j, 0x000000);
+        // Right border
+        my_mlx_pixel_put(w, x + p->tile_size - 1, y + j, 0x000000);
     }
 }
 
@@ -43,10 +56,10 @@ void	set_win_values(t_window *ups, t_data *m)
 	ups->mlx = mlx_init();
 	if (!ups->mlx)
 		error_message(0, m);
-	ups->window = mlx_new_window(ups->mlx, 600, 600, "Mini-Map");
+	ups->window = mlx_new_window(ups->mlx, M_WIDTH, M_HEIGHT, "Mini-Map");
 	if (!ups->window)
 		error_message(0, m);
-	ups->img = mlx_new_image(ups->mlx, 600, 600);
+	ups->img = mlx_new_image(ups->mlx, M_WIDTH, M_HEIGHT);
 	if (!ups->img)
 		error_message(0, m);
 	ups->addr = mlx_get_data_addr(ups->img, &ups->bits_per_pixel, &ups->line_len, &ups->endian);
@@ -54,23 +67,29 @@ void	set_win_values(t_window *ups, t_data *m)
 		error_message(0, m);
 }
 
-void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p, int tile_size)
+void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p)
 {
+	char	**t;
+
 	cur->y = 0;
+	t = map->layout;
 	while (cur->y < p->rows)
 	{
 		cur->x = 0;
 		while (cur->x <= p->max)
 		{
-			if (map->layout[cur->y][cur->x] == '1')
-				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x0000FF, tile_size);
-			else if (map->layout[cur->y][cur->x] == '0')
-				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x000000, tile_size);
-			else if (map->layout[cur->y][cur->x] == 'N' || map->layout[cur->y][cur->x] == 'S' || map->layout[cur->y][cur->x] == 'E'
-				|| map->layout[cur->y][cur->x] == 'W')
+			if (t[cur->y][cur->x] == '1')
 			{
-				draw_square(m->window, (cur->x * tile_size) + GAP_SIZE, (cur->y * tile_size) + GAP_SIZE, 0x000000, tile_size);
-				mark_player(m, cur->x, cur->y, tile_size);
+				draw_square(m->window, cur, p, 0x0000FF);
+				// printf("Successfully draws a one\n");
+			}
+			else if (t[cur->y][cur->x] == '0')
+				draw_square(m->window, cur, p, 0x000000);
+			else if (t[cur->y][cur->x] == 'N' || t[cur->y][cur->x] == 'S'
+				|| t[cur->y][cur->x] == 'E' || t[cur->y][cur->x] == 'W')
+			{
+				draw_square(m->window, cur, p, 0x000000);
+				mark_player(m, cur->x, cur->y, p);
 			}
 			cur->x++;
 		}
@@ -80,26 +99,40 @@ void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p, int tile_size)
 
 int calculatetilesize(int window_dimension, int map_dimension)
 {
-    return (window_dimension / map_dimension) - GAP_SIZE;
+    return (window_dimension / map_dimension) - 1;
 }
 
-void    draw_minimap(t_data *m)
+void	set_tilesize(t_parse *parse) //Set the size of the tiles
 {
-	int	tile_size;
+	int k;
 	int	j;
-	int	k;
-
-	m->window = malloc(sizeof(t_window));
-	set_win_values(m->window, m);
-	k = calculatetilesize(600, m->parse->max);
-	j = calculatetilesize(600, m->parse->rows);
+	
+	k = calculatetilesize(M_WIDTH, parse->max);
+	j = calculatetilesize(M_HEIGHT, parse->rows);
 	if (k < j)
-		tile_size = k;
+		parse->tile_size = k;
 	else
-		tile_size = j;
-	draw(m, m->map, m->cur, m->parse, tile_size);
-	draw_player(m->window, m->player, tile_size);
-	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);
-	mlx_hook(m->window->window, 02, 1L << 0, keypress, m->window);
-	mlx_hook(m->window->window, 17, 1L << 0, exit_window, m->window);
+		parse->tile_size = j;
 }
+
+void    draw_grid(t_data *m)
+{
+	set_win_values(m->window, m);
+	set_tilesize(m->parse);
+	draw(m, m->map, m->cur, m->parse);
+}
+
+//Get max width and max height for pixels
+// {
+// 	int	max_width = map_width * tile_size;
+// 	int	max_height = map_width * tile_size;
+// }
+//Calculate cameraX for each column on the screen and also the rayDirX for each column on the screen
+//{
+//	for (int x = 0; x < screenWidth; x++) {
+	// Calculate the cameraX coordinate for this column
+//double cameraX = (2 * x / (double)screenWidth) - 1;    
+// Calculate ray direction f
+// double rayDirX = player->dir_x + cameraPlaneX * cameraX;
+//double rayDirY = player->dir_y + cameraPlaneY * cameraX;
+//

@@ -6,13 +6,13 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 19:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/28 15:28:13 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/29 18:22:38 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void draw_circle(t_window *w, int center_x, int center_y, int radius, int color)
+void draw_circle(t_window *w, int center_x, int center_y, int radius)
 {
 	int x;
 	int	y;
@@ -26,7 +26,7 @@ void draw_circle(t_window *w, int center_x, int center_y, int radius, int color)
         while (x <= radius)
         {
 			if ((x * x) + (y * y) <= radius_squared)
-				my_mlx_pixel_put(w, center_x + x, center_y + y, color);
+				my_mlx_pixel_put(w, center_x + x, center_y + y, 0xFF0000);
 			x++;
         }
 		y++;
@@ -38,19 +38,18 @@ void draw_player(t_window *w, t_player *player, int tile_size)
     int radius;
 
 	radius = tile_size / 4;
-    draw_circle(w, (int)player->pos_x, (int)player->pos_y, radius, 0xFF0000);
+    draw_circle(w, (int)player->pos_x, (int)player->pos_y, radius);
 }
 
-void    mark_player(t_data *data, int x, int y, int tile_size)
+void    mark_player(t_data *data, int x, int y, t_parse *p)
 {
-	int player_size;
-	int color;
-
-	player_size = 1;
-	color = 0xFF0000;
-	data->player = malloc(sizeof(t_player));
- 	data->player->pos_x = (x * tile_size) + (tile_size / 2.0);
-    data->player->pos_y = (y * tile_size) + (tile_size / 2.0);
+	// printf("After allocation %p\n", data->player);
+	if (p->encountered == 2) //Flag to help for keys when movement occurs
+		return ;
+	//Set player position
+ 	data->player->pos_x = (x * p->tile_size) + (p->tile_size / 2.0);
+    data->player->pos_y = (y * p->tile_size) + (p->tile_size / 2.0);
+	//Set angles accordingly
 	if (data->map->layout[y][x] == 'E')
 		data->player->angle = 0;
 	if (data->map->layout[y][x] == 'N')
@@ -59,5 +58,7 @@ void    mark_player(t_data *data, int x, int y, int tile_size)
 		data->player->angle = PI;
 	else if (data->map->layout[y][x] == 'S')
 		data->player->angle = 3 * PI / 2;
+	//Set where player is at to a space
 	data->map->layout[y][x] = '0';
+	p->encountered = 2;
 }
