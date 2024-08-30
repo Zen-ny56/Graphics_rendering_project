@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/29 18:26:26 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/30 18:54:09 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	redraw(t_data *m)
 	set_tilesize(m->parse);
 	draw(m, m->map, m->cur, m->parse);
 	draw_player(m->window, m->player, m->parse->tile_size);
-	raycasting(m);
+	set_raydir(m->player, m->window);
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);	
 }
 
