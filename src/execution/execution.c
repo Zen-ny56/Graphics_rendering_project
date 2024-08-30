@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/30 20:46:39 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/30 20:47:33 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	cal_delta(t_player *player)
 	player->deltaDistY = fabs(1 / player->raydir_y); // Difference between two horizontal intersections
 }
 
-void draw_line(t_window *w, int x0, int y0, int x1, int y1, int color)
+void draw_line(t_window *w, int x0, int y0, int x1, int y1, int color) // Messed up don't bother reading
 {
     // Calculate differences and determine the direction of the line
     int dx = abs(x1 - x0);   // Difference in x
