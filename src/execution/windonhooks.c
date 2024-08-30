@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/30 18:54:09 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/30 19:58:20 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ void	redraw(t_data *m)
 	set_tilesize(m->parse);
 	draw(m, m->map, m->cur, m->parse);
 	draw_player(m->window, m->player, m->parse->tile_size);
-	set_raydir(m->player, m->window);
+	set_raydir(m->player, m->window, m);
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);	
 }
 
 int	basic_movement(int keycode, t_player *player, t_data *m)
 {	
-	// printf("%f\n", player->pos_x);
-	// printf("%f\n", player->pos_y);
-	// printf("aaa\n");
-	if (keycode == 1)
+
+	if (keycode == 13)
 	{	
 		player->pos_x += player->dir_x * MOVE_SPEED;
 		player->pos_y += player->dir_y * MOVE_SPEED;
@@ -37,7 +35,7 @@ int	basic_movement(int keycode, t_player *player, t_data *m)
 		player->pos_x -= player->dir_y * MOVE_SPEED;
 		player->pos_y += player->dir_x * MOVE_SPEED;
 	}
-	else if (keycode == 13)
+	else if (keycode == 1)
 	{
 		player->pos_x -= player->dir_x * MOVE_SPEED;
 		player->pos_y -= player->dir_y * MOVE_SPEED;

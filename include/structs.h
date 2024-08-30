@@ -4,8 +4,10 @@
 typedef struct s_map
 {
 	char	**layout;
-	int		px;
 	int		py;
+	int		px;
+	int		mapX;
+	int		mapY;
 	int		height;
 }			t_map;
 
@@ -70,6 +72,8 @@ typedef	struct s_player
 	double raydir_y;
 	double sideDistX;
 	double sideDistY;
+	int	   stepX;
+	int	   stepY;
 	double deltaDistX;
 	double deltaDistY;
 }		t_player;
