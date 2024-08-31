@@ -72,10 +72,14 @@ typedef	struct s_player
 	double raydir_y;
 	double sideDistX;
 	double sideDistY;
+	double perpWallDist;
 	int	   stepX;
 	int	   stepY;
+	int	   side;
 	double deltaDistX;
 	double deltaDistY;
+	double endRayY;
+	double endRayX;
 }		t_player;
 
 typedef	struct s_parse
