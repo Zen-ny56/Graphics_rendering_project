@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/31 18:26:21 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/31 20:26:17 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ void	cal_side(t_player *player, t_map *map)
 	if (player->raydir_y < 0)
 	{
 		player->stepY = -1; // Stepping down
-		player->deltaDistY = (player->pos_y - map->mapY) * player->deltaDistY; // Distance to the border below
+		player->sideDistY = (player->pos_y - map->mapY) * player->deltaDistY; // Distance to the border below
 	}
 	else
 	{
 		player->stepY = 1; // Stepping up
-		player->deltaDistY = (map->mapY + 1.0 - player->pos_y) * player->deltaDistY; // Distance to the upperside
+		player->sideDistY = (map->mapY + 1.0 - player->pos_y) * player->deltaDistY; // Distance to the upperside
 	}
 }
 
 void draw_ray(t_window *w, t_player *player, int color)
 {
     // Draw the ray in short segments
-    float current_x = player->pos_x;
-    float current_y = player->pos_y;
-    int distance_remaining = (int)player->perpWallDist;
+    double current_x = player->pos_x;
+    double current_y = player->pos_y;
+    double distance_remaining = player->perpWallDist;
     while (distance_remaining > 0)
     {
         // Convert current position to pixel coordinates
@@ -83,7 +83,6 @@ void draw_ray(t_window *w, t_player *player, int color)
 		current_x += player->raydir_x;// Update the current x position
 		current_y += player->raydir_y;// Update the current y position
 		distance_remaining -= 1;// Decrease the remaining distance
-		printf("distance remaining %d\n", distance_remaining);
     }
 }
 
@@ -113,8 +112,14 @@ void	performDDA(t_player *player, t_map *map, t_parse *p)
 
 void	cal_delta(t_player *player)
 {
-	player->deltaDistX = fabs(1 / player->raydir_x); // Difference between two vertical intersections
-	player->deltaDistY = fabs(1 / player->raydir_y); // Difference between two horizontal intersections
+	if (player->raydir_x == 0)
+		player->deltaDistX = 1e30; // Handles edge case of division by zero
+	else
+		player->deltaDistX = fabs(1 / player->raydir_x); // Difference between two vertical intersections
+	if (player->raydir_y == 0)
+		player->deltaDistY = 1e30; // Handle edge case of division by zero
+	else
+		player->deltaDistY = fabs(1 / player->raydir_y); // Difference between two horizontal intersections
 }
 
 void	calWallDist(t_player *player, t_data *m)
@@ -137,9 +142,9 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 	int	x;
 
 	x = 0;
-	(void)window;
 	while (x < M_WIDTH)
 	{
+		(void)window;
 		player->cameraX = (2 * x / (double)M_WIDTH) - 1; // Calculate cameraX for each column
 		player->raydir_x = player->dir_x + player->plane_x * player->cameraX; // Calculation of raydir_x
 		player->raydir_y = player->dir_y + player->plane_y * player->cameraX; // Calculation of raydir_y
@@ -149,9 +154,6 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		performDDA(player, m->map, m->parse);
 		calWallDist(player, m);
 		draw_ray(m->window, m->player, 0x00FF00);
-		break;
-		//Handle where ray is drawn , yet to be done  (If perpetual wall distance is 0 break loop that draws rays)
-		//If perpetual wall distance check which side it is if it horizontal or vertical in which direction to be specific and decide where we're allowed to move if key is pressed check if movement is allowed
 		x++;
 	}
 }
