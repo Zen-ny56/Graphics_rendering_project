@@ -96,6 +96,13 @@ typedef	struct s_parse
 	t_point		*point;
 }				t_parse;
 
+typedef struct s_wall
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+}			t_wall;
+
 typedef struct s_data
 {
 	t_parse		*parse;
@@ -103,6 +110,7 @@ typedef struct s_data
 	t_window	*window;
 	t_cur		*cur;
 	t_player	*player;
+	t_wall		*wall;
 }				t_data;
 
 #endif

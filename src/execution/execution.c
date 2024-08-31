@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/31 14:45:31 by naadam           ###   ########.fr       */
+/*   Updated: 2024/08/31 17:26:33 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,19 @@ void	cal_delta(t_player *player)
 	player->deltaDistY = fabs(1 / player->raydir_y); // Difference between two horizontal intersections
 }
 
-void	calWallDist(t_player *player, t_parse *p)
+void	calWallDist(t_player *player, t_data *m)
 {
-	(void)p;
 	if (player->side == 0)
 		player->perpWallDist = player->sideDistX - player->deltaDistX;
 	else
 		player->perpWallDist = player->sideDistY - player->deltaDistY;
-	// printf("Perpetual wall distance: %f\n", player->perpWallDist);
-	// player->endRayX = (player->pos_x + player->raydir_x) * player->perpWallDist;
-	// player->endRayY = (player->pos_y + player->raydir_y) * player->perpWallDist;
-	// if (player->endRayX < 0)
-	// 	player->endRayX = 0;
-	// if (player->endRayX >= M_WIDTH)
-	// 	player->endRayX = M_WIDTH - 1;
-	// printf("Ray end-point  at x %f Ray end-point at y %f\n", player->endRayX, player->endRayY);
+	m->wall->line_height = (int)(M_HEIGHT / player->perpWallDist);
+	m->wall->draw_start = -1 * (m->wall->line_height / 2 + M_HEIGHT / 2);
+	if (m->wall->draw_start < 0)
+		m->wall->draw_start = 0;
+	m->wall->draw_end = m->wall->line_height / 2 + M_HEIGHT / 2;
+	if (m->wall->draw_end >= M_HEIGHT)
+		m->wall->draw_end = M_HEIGHT - 1;
 }
 
 void	set_raydir(t_player *player, t_window *window, t_data *m)
@@ -132,7 +130,9 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		cal_side(player, m->map);
 		cal_delta(player);
 		performDDA(player, m->map, m->parse);
-		calWallDist(player, m->parse);
+		calWallDist(player, m);
+		//Handle collision , yet to be done  (If perpetual wall distance is 0 break loop that draws rays)
+		//If perpetual wall distance check which side it is if it horizontal or vertical in which direction to be specific and decide where we're allowed to move if key is pressed check if movement is allowed
 		x++;
 	}
 }
@@ -156,7 +156,7 @@ void	draw_minimap(t_data *m)
 
 void    execution(t_data *main)
 {
-	// printf("%c\n", main->map->layout[12][26]);
+	main->wall = malloc(sizeof(t_wall));
 	main->window = malloc(sizeof(t_window));
 	main->player = malloc(sizeof(t_player));
 	draw_minimap(main);
