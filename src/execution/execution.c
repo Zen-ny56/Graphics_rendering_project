@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/04 18:26:26 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:34:15 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ void	cal_side(t_player *player, t_map *map)
 	if (player->raydir_x < 0)
 	{
     	player->stepX = -1; //Stepping to the left side
-		player->sideDistX = (player->pos_x - map->mapX) * player->deltaDistX; // Distance to a left border of a grid
+		player->sideDistX = (player->pos_x - map->mapX); // Distance of left border
 	}
 	else
 	{
 		player->stepX = 1; // Stepping to the right side
-		player->sideDistX = (map->mapX + 1.0 - player->pos_x) * player->deltaDistX; // Distance to a right border of a grid
+		player->sideDistX = (map->mapX + 1.0 - player->pos_x); // Distance to right border
 	}
 	if (player->raydir_y < 0)
 	{
 		player->stepY = -1; // Stepping down
-		player->sideDistY = (player->pos_y - map->mapY) * player->deltaDistY; // Distance to the border below
+		player->sideDistY = (player->pos_y - map->mapY); // Distance to the border below
 	}
 	else
 	{
 		player->stepY = 1; // Stepping up
-		player->sideDistY = (map->mapY + 1.0 - player->pos_y) * player->deltaDistY; // Distance to the upperside
+		player->sideDistY = (map->mapY + 1.0 - player->pos_y); // Distance to upperside
 	}
 }
 
@@ -148,16 +148,15 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		player->cameraX = (2 * x / (double)M_WIDTH - 1); // Calculate cameraX for each column
 		player->raydir_x = player->dir_x + player->plane_x * player->cameraX; // Calculation of raydir_x
 		player->raydir_y = player->dir_y + player->plane_y * player->cameraX; // Calculation of raydir_y
-		if (x == 1)
+		if (x == 0)
         {
-
- 		   printf("Far-right ray hit check:\n");
-   		 printf("Initial player position: (%f, %f)\n", player->pos_x, player->pos_y);
-    		printf("Direction: (%f, %f)\n", player->raydir_x, player->raydir_y);
+			printf("Far-right ray hit check:\n");
+			printf("Initial player position: (%f, %f)\n", player->pos_x, player->pos_y);
+			printf("Direction: (%f, %f)\n", player->raydir_x, player->raydir_y);
     		printf("Delta distances: (X: %f, Y: %f)\n", player->deltaDistX, player->deltaDistY);
-   			 printf("Step sizes: (X: %d, Y: %d)\n", player->stepX, player->stepY);
-    		printf("Side distances: (X: %f, Y: %f)\n", player->sideDistX, player->sideDistY);
- 		   printf("Perpendicular wall distance: %f\n", player->perpWallDist);
+			printf("Step sizes: (X: %d, Y: %d)\n", player->stepX, player->stepY);
+			printf("Side distances: (X: %f, Y: %f)\n", player->sideDistX, player->sideDistY);
+			printf("Perpendicular wall distance: %f\n", player->perpWallDist);
         }
 		// Raycasting to take place here
 		cal_side(player, m->map);
