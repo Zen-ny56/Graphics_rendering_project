@@ -11,6 +11,7 @@
 #define FOV (PI / 3)
 #define M_WIDTH 600
 #define M_HEIGHT 600
+#define EPSILON 1e-6
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/31 20:26:17 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/04 18:26:26 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,15 +145,27 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 	while (x < M_WIDTH)
 	{
 		(void)window;
-		player->cameraX = (2 * x / (double)M_WIDTH) - 1; // Calculate cameraX for each column
+		player->cameraX = (2 * x / (double)M_WIDTH - 1); // Calculate cameraX for each column
 		player->raydir_x = player->dir_x + player->plane_x * player->cameraX; // Calculation of raydir_x
 		player->raydir_y = player->dir_y + player->plane_y * player->cameraX; // Calculation of raydir_y
+		if (x == 1)
+        {
+
+ 		   printf("Far-right ray hit check:\n");
+   		 printf("Initial player position: (%f, %f)\n", player->pos_x, player->pos_y);
+    		printf("Direction: (%f, %f)\n", player->raydir_x, player->raydir_y);
+    		printf("Delta distances: (X: %f, Y: %f)\n", player->deltaDistX, player->deltaDistY);
+   			 printf("Step sizes: (X: %d, Y: %d)\n", player->stepX, player->stepY);
+    		printf("Side distances: (X: %f, Y: %f)\n", player->sideDistX, player->sideDistY);
+ 		   printf("Perpendicular wall distance: %f\n", player->perpWallDist);
+        }
 		// Raycasting to take place here
 		cal_side(player, m->map);
 		cal_delta(player);
 		performDDA(player, m->map, m->parse);
 		calWallDist(player, m);
-		draw_ray(m->window, m->player, 0x00FF00);
+		//Handle collision
+		draw_ray(m->window, m->player, 0x00FF00);			
 		x++;
 	}
 }

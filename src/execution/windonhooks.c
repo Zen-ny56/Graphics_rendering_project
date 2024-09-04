@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/30 19:58:20 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/04 17:53:36 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,6 @@ int	keypress(int keycode, t_data *m)
 		if (!exit_window(m))
 			exit(0);
 	}
-	// printf("Here\n");
-	// printf("%p Window pointer\n", m->window);
-	// printf("%p Parse pointer\n", m->parse);
-	// printf("%p Player pointer\n", m->player);
-	// printf("%f %f\n", m->player->dir_x, m->player->dir_y);
-	// printf("%f %f\n", m->player->pos_x, m->player->pos_y);
 	if ((keycode >= 0 && keycode <= 2) || keycode == 13)
 		basic_movement(keycode, m->player, m);
 	if (keycode == 123)
