@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:39:57 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/29 18:28:11 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/04 17:22:57 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p)
 		while (cur->x <= p->max)
 		{
 			if (t[cur->y][cur->x] == '1')
-			{
 				draw_square(m->window, cur, p, 0x0000FF);
-				// printf("Successfully draws a one\n");
-			}
 			else if (t[cur->y][cur->x] == '0')
 				draw_square(m->window, cur, p, 0x000000);
 			else if (t[cur->y][cur->x] == 'N' || t[cur->y][cur->x] == 'S'
