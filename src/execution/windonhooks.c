@@ -6,11 +6,25 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/04 19:46:30 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/04 20:44:06 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	check_collision(t_data *m, double ox, double oy)
+{
+	t_player *pl;
+	int		t;
+
+	pl = m->player;
+	t = m->parse->tile_size;
+	if (m->map->layout[(int)pl->pos_y / t][(int)pl->pos_x / t] == '1')
+	{
+		m->player->pos_x = ox;
+		m->player->pos_y = oy;
+	}	
+}
 
 void	redraw(t_data *m)
 {
@@ -23,8 +37,9 @@ void	redraw(t_data *m)
 }
 
 int	basic_movement(int keycode, t_player *player, t_data *m)
-{	
-
+{
+	double	original_x = player->pos_x;
+	double	original_y = player->pos_y;
 	if (keycode == 13)
 	{	
 		player->pos_x += player->dir_x * MOVE_SPEED;
@@ -45,7 +60,7 @@ int	basic_movement(int keycode, t_player *player, t_data *m)
 		player->pos_x -= player->dir_y * MOVE_SPEED;
 		player->pos_y += player->dir_x * MOVE_SPEED;
 	}
-	//Call redraw_function
+	check_collision(m, original_x, original_y);
 	redraw(m);
 	return (0);
 }
