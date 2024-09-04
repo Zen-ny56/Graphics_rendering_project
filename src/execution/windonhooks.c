@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/04 17:53:36 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:46:30 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	basic_movement(int keycode, t_player *player, t_data *m)
 	}
 	else if (keycode == 0)
 	{
-		player->pos_x -= player->dir_y * MOVE_SPEED;
-		player->pos_y += player->dir_x * MOVE_SPEED;
+		player->pos_x += player->dir_y * MOVE_SPEED;
+		player->pos_y -= player->dir_x * MOVE_SPEED;
 	}
 	else if (keycode == 1)
 	{
@@ -42,8 +42,8 @@ int	basic_movement(int keycode, t_player *player, t_data *m)
 	}
 	else if (keycode == 2)
 	{
-		player->pos_x += player->dir_y * MOVE_SPEED;
-		player->pos_y -= player->dir_x * MOVE_SPEED;
+		player->pos_x -= player->dir_y * MOVE_SPEED;
+		player->pos_y += player->dir_x * MOVE_SPEED;
 	}
 	//Call redraw_function
 	redraw(m);
