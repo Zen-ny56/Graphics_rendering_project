@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:39:57 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/04 17:22:57 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/05 14:16:33 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,3 @@ void    draw_grid(t_data *m)
 	draw(m, m->map, m->cur, m->parse);
 }
 
-//Get max width and max height for pixels
-// {
-// 	int	max_width = map_width * tile_size;
-// 	int	max_height = map_width * tile_size;
-// }
-//Calculate cameraX for each column on the screen and also the rayDirX for each column on the screen
-//{
-//	for (int x = 0; x < screenWidth; x++) {
-	// Calculate the cameraX coordinate for this column
-//double cameraX = (2 * x / (double)screenWidth) - 1;    
-// Calculate ray direction f
-// double rayDirX = player->dir_x + cameraPlaneX * cameraX;
-//double rayDirY = player->dir_y + cameraPlaneY * cameraX;
-//

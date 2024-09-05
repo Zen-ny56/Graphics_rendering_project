@@ -85,7 +85,7 @@ void	free_map(t_map *map)
 	{
 		if (map->layout)
 			free_array(map->layout);
-		free(map);
+		// free(map);
 	}
 }
 
@@ -93,28 +93,26 @@ void	free_and_exit(t_data *data, int num)
 {
 	if (data)
 	{
-		// Free player structure
 		if (data->player)
 		{
-			printf("Here\n");
 			free(data->player);
 			data->player = NULL;
 		}
-		// Free map structure and its contents
 		if (data->map)
 		{
 			free_map(data->map);
 			data->map = NULL;
 		}
-
-		// Free parse structure and its contents
 		if (data->parse)
 		{
 			free_par(data->parse);
 			data->parse = NULL;
 		}
-
-		// Free the data structure itself
+		if (data->wall)
+		{
+			free(data->wall);
+			data->wall = NULL;
+		}
 		free(data);
 		data = NULL;
 		if (num >= 0)

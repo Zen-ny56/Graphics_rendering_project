@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/04 20:44:06 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:01:52 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int exit_window(t_data *m) // Exit window
 {
 	mlx_clear_window(m->window->mlx, m->window->window);
 	mlx_destroy_window(m->window->mlx, m->window->window);
-	//Free memory
-	exit(0);
+	free_and_exit(m, 0);
 	ft_putstr_fd("Window exited\n", 1);
 	return (0);
 }
@@ -102,7 +101,7 @@ void	rotate(t_player *player, double angle, t_data *m) // Handle rotation
 
 int	keypress(int keycode, t_data *m)
 {
-	if (keycode== 53)
+	if (keycode == 53)
 	{
 		if (!exit_window(m))
 			exit(0);
