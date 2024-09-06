@@ -61,6 +61,7 @@ typedef struct s_window
 	int		cnv_en4;
 	int		texx;
 	int		texy;
+	double	texX;
 }              t_window;
 
 typedef	struct s_texture
@@ -134,6 +135,7 @@ typedef struct s_wall
 	int	line_height;
 	int	draw_start;
 	int	draw_end;
+	double	wallX;
 }			t_wall;
 
 typedef struct s_data

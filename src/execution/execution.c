@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/06 19:06:34 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/06 19:28:24 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		player->cameraX = (2 * x / (double)M_WIDTH - 1); // Calculate cameraX for each column
 		player->raydir_x = player->dir_x + player->plane_x * player->cameraX; // Calculation of raydir_x
 		player->raydir_y = player->dir_y + player->plane_y * player->cameraX; // Calculation of raydir_y
-		// Raycasting to take place here
 		cal_side(player, m->map);
 		cal_delta(player);
 		performDDA(player, m->map, m->parse);
