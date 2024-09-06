@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/05 15:03:27 by naadam            #+#    #+#             */
+/*   Updated: 2024/09/06 17:18:18 by naadam           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	free_array(char **s)
@@ -40,8 +52,6 @@ void	free_color(t_color *c)
 			free(c->g);
 		if (c->b)
 			free(c->b);
-		if (c->argb)
-			free(c->argb);
 	}
 }
 
@@ -85,7 +95,6 @@ void	free_map(t_map *map)
 	{
 		if (map->layout)
 			free_array(map->layout);
-		// free(map);
 	}
 }
 

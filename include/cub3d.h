@@ -68,4 +68,6 @@ void	raycasting(t_data *main);
 void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p);
 void	set_tilesize(t_parse *parse);
 void	set_raydir(t_player *player, t_window *window, t_data *m);
+void    add_textures(t_data *m, t_window *w, t_parse *p);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/04 19:41:42 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/06 19:06:34 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 	int	x;
 
 	x = 0;
+	add_textures(m, m->window, m->parse);
 	while (x < M_WIDTH)
 	{
 		(void)window;
@@ -153,7 +154,7 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		cal_delta(player);
 		performDDA(player, m->map, m->parse);
 		calWallDist(player, m);
-		//Handle collision
+		// textureMappin(player, m);
 		draw_ray(m->window, m->player, 0x00FF00);			
 		x++;
 	}

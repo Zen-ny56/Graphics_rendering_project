@@ -29,6 +29,38 @@ typedef struct s_window
 	int		width;
 	int		height;
 	int		color;
+	int		tex_w;
+	int		tex_h;
+	int		tex_w1;
+	int		tex_h1;
+	int		tex_w2;
+	int		tex_h2;
+	int		tex_w3;
+	int		tex_h3;
+	int		tex_w4;
+	int		tex_h4;
+	void	*cnv_img1;
+	int		*cnv_addr1;
+	int		cnv_bpp1;
+	int		cnv_ll1;
+	int		cnv_en1;
+	void	*cnv_img2;
+	int		*cnv_addr2;
+	int		cnv_bpp2;
+	int		cnv_ll2;
+	int		cnv_en2;
+	void	*cnv_img3;
+	int		*cnv_addr3;
+	int		cnv_bpp3;
+	int		cnv_ll3;
+	int		cnv_en3;
+	void	*cnv_img4;
+	int		*cnv_addr4;
+	int		cnv_bpp4;
+	int		cnv_ll4;
+	int		cnv_en4;
+	int		texx;
+	int		texy;
 }              t_window;
 
 typedef	struct s_texture
@@ -44,8 +76,9 @@ typedef struct s_color
 	int	*r;
 	int *g;
 	int *b;
-	int	*argb;
-	int flag;
+	int	cflag; // 0 means floor color is first else start with ceiling
+	int floor_color;
+	int	ceiling_color;
 }			t_color;
 
 typedef struct s_point
