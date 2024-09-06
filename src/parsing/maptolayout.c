@@ -6,12 +6,11 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/20 21:10:11 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/06 15:54:18 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 char **deep_copy_layout(char **layout, int y)
 {

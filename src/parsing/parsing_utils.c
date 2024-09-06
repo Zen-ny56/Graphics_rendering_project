@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:39:54 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/16 16:07:24 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/06 17:15:26 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	init_color(t_color *c)
 	c->g = NULL;
 	c->r = NULL;
 	c->b = NULL;
-	c->argb = NULL;
+	c->cflag = -1;
+	c->floor_color = -1;
+	c->ceiling_color = -1;
 }
 
 void	init_main(t_data *m)
