@@ -9,8 +9,8 @@
 #define MOVE_SPEED 1
 #define PI 3.14159265358979323846
 #define FOV (PI / 3)
-#define M_WIDTH 600
-#define M_HEIGHT 600
+#define M_WIDTH 1000
+#define M_HEIGHT 1500
 #define EPSILON 1e-6
 
 # include "mlx/mlx.h"
