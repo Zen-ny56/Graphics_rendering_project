@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 18:23:50 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/06 19:14:12 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:40:08 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	store_textures(t_texture *t, t_window *w)
 {
 	(void)t;
-	w->cnv_img1 = mlx_xpm_file_to_image(w->mlx, "./textures/gradient2.xpm", &w->tex_w1, &w->tex_h1);
-	w->cnv_img2 = mlx_xpm_file_to_image(w->mlx, "./textures/purplestone.xpm", &w->tex_w2, &w->tex_h2);
-	w->cnv_img3 = mlx_xpm_file_to_image(w->mlx, "./textures/gradient3.xpm", &w->tex_w3, &w->tex_h3);
-	w->cnv_img4 = mlx_xpm_file_to_image(w->mlx, "./textures/gradient4.xpm", &w->tex_w4, &w->tex_h4);
+	w->cnv_img1 = mlx_xpm_file_to_image(w->mlx, "./textures/dali.xpm", &w->tex_w1, &w->tex_h1);
+	w->cnv_img2 = mlx_xpm_file_to_image(w->mlx, "./textures/Judith.xpm", &w->tex_w2, &w->tex_h2);
+	w->cnv_img3 = mlx_xpm_file_to_image(w->mlx, "./textures/Night.xpm", &w->tex_w3, &w->tex_h3);
+	w->cnv_img4 = mlx_xpm_file_to_image(w->mlx, "./textures/Pearl.xpm", &w->tex_w4, &w->tex_h4);
 }
 
 void get_textures_add(t_window *w)

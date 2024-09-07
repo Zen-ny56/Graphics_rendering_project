@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 20:09:09 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:46:42 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void draw_3d(t_data *m, int x)
 
     for (y = 0; y < m->wall->draw_start; y++) 
     {
-        my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // Light blue color for ceiling
+        my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // X and Y being passed in here
     }
     texture_prep(m);
     step = 1.0 * m->window->tex_h / m->wall->line_height;
@@ -157,21 +157,17 @@ void draw_3d(t_data *m, int x)
     y = m->wall->draw_start;
     while (y < m->wall->draw_end)
     {
-		if (x >= 600 || y >= 600)
-		{
-			exit(1);
-		}
         tex_y = (int)texpos & (m->window->tex_h - 1);
         texpos += step;
         color = get_color(m, tex_y); // Function to get the color from the texture
         if (m->player->side == 1) // Darken the texture if it's a side wall
             color = (color >> 1) & 0x7F7F7F;
-        my_mlx_pixel_put(m->window, x, y, color); // Draw the textured wall
+        my_mlx_pixel_put(m->window, x, y, color); // X and Y being passed in here
         y++;
     }
     for (y = m->wall->draw_end; y < M_HEIGHT; y++) 
     {
-        my_mlx_pixel_put(m->window, x, y, m->parse->color->floor_color); // Brown color for floor
+        my_mlx_pixel_put(m->window, x, y, m->parse->color->floor_color); // X and Y being passed in here
     }
 }
 
@@ -193,7 +189,7 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		calWallDist(player, m);
 		draw_3d(m, x);
 		// textureMappin(player, m);
-		draw_ray(m->window, m->player, 0x00FF00);			
+		// draw_ray(m->window, m->player, 0x00FF00);			
 		x++;
 	}
 }
