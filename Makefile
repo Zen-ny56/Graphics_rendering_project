@@ -14,7 +14,7 @@ SRCS = ./src/main.c \
 		./src/parsing/maptostruct.c ./src/parsing/xpm_parsing.c ./src/parsing/color_parsing.c ./src/parsing/color_parsing2.c\
 		./src/parsing/parse_point.c ./src/parsing/initial_check.c ./src/execution/add_textures.c\
 		./src/execution/execution.c ./src/execution/drawminimap.c ./src/execution/mark_player.c ./src/execution/windonhooks.c\
-		./src/exit/error.c ./src/exit/free.c\
+		./src/exit/error.c ./src/exit/free.c ./src/execution/textmappin.c\
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:46:13 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/06 21:33:52 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:33:44 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,47 +52,51 @@ void	texture_prep(t_data *data)
 		data->window->texX = data->window->tex_w - data->window->texX - 1;
 }
 
-void	texture_loop(t_data *data, int x)
-{
-	double	step;
-	double	texpos;
-	int		y;
-	int		color;
-
-	color = 0;
-	texture_prep(data); // Bu fonksiyonun detaylarına da ihtiyacınız olacak
-	step = 1.0 * data->window->tex_h / data->wall->line_height;
-	texpos = (data->wall->draw_start - data->window->height / 2 + data->wall->line_height / 2) * step;
-	y = data->wall->draw_start;
-	while (y < data->wall->draw_end + 1)
-	{
-		int texy = (int)texpos & (data->window->tex_h - 1);
-		texpos += step;
-		color = get_color(data); // Bu fonksiyon, doku ve renk bilgilerini alıp işlemelidir.
-		if (data->player->side == 1)
-			color = (color >> 1) & 8355711;
-		data->window->addr[y * data->window->line_len + x] = color; // Burada line_len kullanılması daha uygun
-		y++;
-	}
-}
-
-// int	get_color(t_data *data)
+// void	texture_loop(t_data *data, int x)
 // {
-// 	int	color;
-// 	int	tex_w = data->window->tex_w;
-// 	int	tex_h = data->window->tex_h;
-// 	int	tex_x = data->window->texx;
-// 	int	tex_y = data->window->texy;
+// 	double	step;
+// 	double	texpos;
+// 	int		y;
+// 	int		color;
 
 // 	color = 0;
-// 	if (data->player->side == 0 && data->player->raydir_x > 0)
-// 		color = *(data->window-> + (tex_h * tex_y + tex_x));
-// 	else if (data->player->side == 0 && data->player->raydir_x < 0)
-// 		color = *(data->window->so + (tex_h * tex_y + tex_x));
-// 	else if (data->player->side == 1 && data->player->raydir_y > 0)
-// 		color = *(data->window->we + (tex_h * tex_y + tex_x));
-// 	else if (data->player->side == 1 && data->player->raydir_y < 0)
-// 		color = *(data->window->ea + (tex_h * tex_y + tex_x));
-
-// 	return color;
+// 	texture_prep(data); // Bu fonksiyonun detaylarına da ihtiyacınız olacak
+// 	step = 1.0 * data->window->tex_h / data->wall->line_height;
+// 	texpos = (data->wall->draw_start - data->window->height / 2 + data->wall->line_height / 2) * step;
+// 	y = data->wall->draw_start;
+// 	while (y < data->wall->draw_end + 1)
+// 	{
+// 		int texy = (int)texpos & (data->window->tex_h - 1);
+// 		texpos += step;
+// 		color = get_color(data); // Bu fonksiyon, doku ve renk bilgilerini alıp işlemelidir.
+// 		if (data->player->side == 1)
+// 			color = (color >> 1) & 8355711;
+// 		data->window->addr[y * data->window->line_len + x] = color; // Burada line_len kullanılması daha uygun
+// 		y++;
+// 	}
 // }
+
+int get_color(t_data *data, int tex_y)
+{
+    int color;
+    int tex_x = data->window->texX; // The x-coordinate in the texture
+    int tex_w = data->window->tex_w; // The width of the texture
+    int *texture_data;
+
+    if (data->player->side == 0)
+    {
+        if (data->player->raydir_x > 0)
+            texture_data = data->window->cnv_addr1; // East wall
+        else
+            texture_data = data->window->cnv_addr2; // West wall
+    }
+    else
+    {
+        if (data->player->raydir_y > 0)
+            texture_data = data->window->cnv_addr3; // North wall
+        else
+            texture_data = data->window->cnv_addr4; // South wall
+    }
+    color = texture_data[tex_y * tex_w + tex_x]; // Get the color from the texture
+    return color;
+}
