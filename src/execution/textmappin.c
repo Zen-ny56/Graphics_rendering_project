@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:46:13 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 17:33:44 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:59:36 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	texture_prep(t_data *data)
 		data->window->texX = data->window->tex_w - data->window->texX - 1;
 	if (data->player->side == 1 && data->player->raydir_y < 0)
 		data->window->texX = data->window->tex_w - data->window->texX - 1;
+    // printf("%f\n", data->window->texX);
 }
 
 // void	texture_loop(t_data *data, int x)

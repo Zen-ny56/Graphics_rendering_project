@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 18:09:51 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:56:18 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void draw_3d(t_data *m, int x)
 	// Draw the wall with texture
     step = 1.0 * m->window->tex_h / m->wall->line_height;
     texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
+	// printf("%f\n", texpos);
     y = m->wall->draw_start;
     while (y <= m->wall->draw_end)
     {
