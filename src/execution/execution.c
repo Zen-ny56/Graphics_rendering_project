@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 17:33:13 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:09:51 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	calWallDist(t_player *player, t_data *m)
 	m->wall->line_height = (int)(M_HEIGHT / player->perpWallDist);
 	// printf("%d\n", m->wall->line_height);
     m->wall->draw_start = (M_HEIGHT / 2) - (m->wall->line_height / 2);
-	printf("%d %d\n", (-1) * m->wall->line_height / 2 + M_HEIGHT / 2 , m->wall->draw_start);
+	// printf("%d %d\n", (m->wall->line_height / 2 + M_HEIGHT / 2 , m->wall->draw_start);
 	if (m->wall->draw_start < 0)
 		m->wall->draw_start = 0;
 	m->wall->draw_end = m->wall->line_height / 2 + M_HEIGHT / 2;
@@ -150,7 +150,7 @@ void draw_3d(t_data *m, int x)
     // Draw the ceiling
     for (y = 0; y < m->wall->draw_start; y++) 
     {
-        my_mlx_pixel_put(m->window, x, y, 0x000000); // Light blue color for ceiling
+        my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // Light blue color for ceiling
     }
 	// Set up texture parameters
     texture_prep(m);
@@ -171,7 +171,7 @@ void draw_3d(t_data *m, int x)
     // Draw the floor
     for (y = m->wall->draw_end + 1; y < M_HEIGHT; y++) 
     {
-        my_mlx_pixel_put(m->window, x, y, 0x000000); // Brown color for floor
+        my_mlx_pixel_put(m->window, x, y, m->parse->color->floor_color); // Brown color for floor
     }
 }
 
