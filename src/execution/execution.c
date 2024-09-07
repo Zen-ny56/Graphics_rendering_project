@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 20:46:42 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:53:48 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,8 @@ void draw_3d(t_data *m, int x)
 
     for (y = 0; y < m->wall->draw_start; y++) 
     {
-        my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // X and Y being passed in here
+		if (x < M_HEIGHT && y < M_WIDTH)
+    	    my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // X and Y being passed in here
     }
     texture_prep(m);
     step = 1.0 * m->window->tex_h / m->wall->line_height;
