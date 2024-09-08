@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/06 19:28:24 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:53:48 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,47 @@ void	calWallDist(t_player *player, t_data *m)
 	else
 		player->perpWallDist = player->sideDistY - player->deltaDistY;
 	m->wall->line_height = (int)(M_HEIGHT / player->perpWallDist);
-	m->wall->draw_start = -1 * (m->wall->line_height / 2 + M_HEIGHT / 2);
+	// printf("%d\n", m->wall->line_height);
+    m->wall->draw_start = (M_HEIGHT / 2) - (m->wall->line_height / 2);
+	// printf("%d %d\n", (m->wall->line_height / 2 + M_HEIGHT / 2 , m->wall->draw_start);
 	if (m->wall->draw_start < 0)
 		m->wall->draw_start = 0;
 	m->wall->draw_end = m->wall->line_height / 2 + M_HEIGHT / 2;
 	if (m->wall->draw_end >= M_HEIGHT)
 		m->wall->draw_end = M_HEIGHT - 1;
+}
+
+void draw_3d(t_data *m, int x)
+{
+    int y;
+    double step;
+    double texpos;
+    int tex_y;
+    int color;
+
+    for (y = 0; y < m->wall->draw_start; y++) 
+    {
+		if (x < M_HEIGHT && y < M_WIDTH)
+    	    my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // X and Y being passed in here
+    }
+    texture_prep(m);
+    step = 1.0 * m->window->tex_h / m->wall->line_height;
+    texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
+    y = m->wall->draw_start;
+    while (y < m->wall->draw_end)
+    {
+        tex_y = (int)texpos & (m->window->tex_h - 1);
+        texpos += step;
+        color = get_color(m, tex_y); // Function to get the color from the texture
+        if (m->player->side == 1) // Darken the texture if it's a side wall
+            color = (color >> 1) & 0x7F7F7F;
+        my_mlx_pixel_put(m->window, x, y, color); // X and Y being passed in here
+        y++;
+    }
+    for (y = m->wall->draw_end; y < M_HEIGHT; y++) 
+    {
+        my_mlx_pixel_put(m->window, x, y, m->parse->color->floor_color); // X and Y being passed in here
+    }
 }
 
 void	set_raydir(t_player *player, t_window *window, t_data *m)
@@ -153,8 +188,9 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		cal_delta(player);
 		performDDA(player, m->map, m->parse);
 		calWallDist(player, m);
+		draw_3d(m, x);
 		// textureMappin(player, m);
-		draw_ray(m->window, m->player, 0x00FF00);			
+		// draw_ray(m->window, m->player, 0x00FF00);			
 		x++;
 	}
 }

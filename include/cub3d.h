@@ -6,11 +6,11 @@
 #endif
 
 #define GAP_SIZE 1
-#define MOVE_SPEED 1
+#define MOVE_SPEED 1.03
 #define PI 3.14159265358979323846
 #define FOV (PI / 3)
-#define M_WIDTH 1000
-#define M_HEIGHT 1500
+#define M_WIDTH 600
+#define M_HEIGHT 600
 #define EPSILON 1e-6
 
 # include "mlx/mlx.h"
@@ -69,5 +69,7 @@ void    draw(t_data *m, t_map *map, t_cur *cur, t_parse *p);
 void	set_tilesize(t_parse *parse);
 void	set_raydir(t_player *player, t_window *window, t_data *m);
 void    add_textures(t_data *m, t_window *w, t_parse *p);
+void	texture_prep(t_data *data);
+int     get_color(t_data *data, int tex_y);
 
 #endif
