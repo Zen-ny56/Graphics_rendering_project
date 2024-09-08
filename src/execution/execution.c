@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/08 19:14:39 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/08 20:35:24 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,7 @@ void	calWallDist(t_player *player, t_data *m)
 	else
 		player->perpWallDist = player->sideDistY - player->deltaDistY;
 	m->wall->line_height = (int)(M_HEIGHT / player->perpWallDist);
-	// printf("%d\n", m->wall->line_height);
 	m->wall->draw_start = (-m->wall->line_height / 2) + (M_HEIGHT / 2);
-	// printf("%d %d\n", (m->wall->line_height / 2 + M_HEIGHT / 2 , m->wall->draw_start);
 	if (m->wall->draw_start < 0)
 		m->wall->draw_start = 0;
 	m->wall->draw_end = m->wall->line_height / 2 + M_HEIGHT / 2;
@@ -156,12 +154,13 @@ void draw_3d(t_data *m, int x)
 	texture_prep(m);
 	step = 1.0 * m->window->tex_h / m->wall->line_height;
 	texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
-	while (y < m->wall->draw_end)
+	while (y < m->wall->draw_end + 1)
 	{
 		tex_y = (int)texpos % (m->window->tex_h - 1);
+		// printf("tex_y %d and texpos %d\n", tex_y, (int)texpos);
 		texpos += step;
 		color = get_color(m, tex_y); // Function to get the color from the texture
-		if (m->player->side == 1) // Darken the texture if it's a side wall
+		if (m->player->side == 1) //  the texture if it's a side wall
 			color = (color >> 1) & 0x7F7F7F;
 		my_mlx_pixel_put(m->window, x, y, color); // X and Y being passed in here
         y++;
@@ -190,7 +189,6 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		performDDA(player, m->map, m->parse);
 		calWallDist(player, m);
 		draw_3d(m, x);
-		// textureMappin(player, m);
 		// draw_ray(m->window, m->player, 0x00FF00);			
 		x++;
 	}
