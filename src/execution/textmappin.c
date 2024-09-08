@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:46:13 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 18:59:36 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:31:04 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int get_color(t_data *data, int tex_y)
         if (data->player->raydir_x > 0)
             texture_data = data->window->cnv_addr1; // East wall
         else
-            texture_data = data->window->cnv_addr2; // West wall
+			texture_data = data->window->cnv_addr2; // West wall
     }
     else
     {

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 20:53:48 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:37:45 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,10 +155,9 @@ void draw_3d(t_data *m, int x)
     texture_prep(m);
     step = 1.0 * m->window->tex_h / m->wall->line_height;
     texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
-    y = m->wall->draw_start;
-    while (y < m->wall->draw_end)
+    while (y < m->wall->draw_end + 1)
     {
-        tex_y = (int)texpos & (m->window->tex_h - 1);
+        tex_y = (int)texpos % (m->window->tex_h - 1);
         texpos += step;
         color = get_color(m, tex_y); // Function to get the color from the texture
         if (m->player->side == 1) // Darken the texture if it's a side wall
