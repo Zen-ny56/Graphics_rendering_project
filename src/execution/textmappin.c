@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:46:13 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/10 16:16:52 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 20:10:27 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	texture_prep(t_data *data)
 	if (data->player->side == 1 && data->player->raydir_y < 0)
 		data->window->texX = data->window->tex_w - data->window->texX - 1;
     // printf("%f\n", data->window->texX);
-    data->window->texX /= data->parse->tile_size;
+    // data->window->texX /= data->parse->tile_size;
 	// data->window->texX /= (int)data->parse->tile_size;
 	// printf("Before calculation - wallX: %f\n", data->wall->wallX);
 	// printf("After calculation - texX: %f\n", data->window->texX);
@@ -101,6 +101,8 @@ int get_color(t_data *data, int tex_y)
         else
             texture_data = data->window->cnv_addr4; // South wall
     }
+    tex_y = tex_y % data->window->tex_h; 
+    tex_x = tex_x % data->window->tex_w;
     color = texture_data[tex_y * tex_w + tex_x]; // Get the color from the texture
     return color;
 }

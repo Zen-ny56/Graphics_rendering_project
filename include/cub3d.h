@@ -6,7 +6,7 @@
 #endif
 
 #define GAP_SIZE 1
-#define MOVE_SPEED 0.25
+#define MOVE_SPEED 8
 
 #define PI 3.14159265358979323846
 #define FOV (PI / 3)

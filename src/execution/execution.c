@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/10 16:31:43 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 20:09:37 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	set_plane(t_player *player)
 {
+	// double aspect_ratio = (double)M_WIDTH / (double)M_HEIGHT;
 	player->plane_length = tan(PI / 6); // Plane length is fixed
 	//Set camera plane
 	player->plane_x = player->dir_y * player->plane_length; 
@@ -75,7 +76,7 @@ void draw_ray(t_window *w, t_player *player, int color)
     // Draw the ray in short segments
     double current_x = player->pos_x;
     double current_y = player->pos_y;
-    double distance_remaining = player->perpWallDist;
+    double distance_remaining = player->perpWallDist  * 21;
     while (distance_remaining > 0)
     {
         // Convert current position to pixel coordinates
@@ -125,10 +126,10 @@ void	cal_delta(t_player *player)
 void	calWallDist(t_player *player, t_data *m)
 {
 	if (player->side == 0)
-		player->perpWallDist = player->sideDistX - player->deltaDistX;
+		player->perpWallDist = (player->sideDistX - player->deltaDistX) / m->parse->tile_size;
 	else
-		player->perpWallDist = player->sideDistY - player->deltaDistY;
-	m->wall->line_height = (int)(M_HEIGHT / player->perpWallDist);
+		player->perpWallDist = (player->sideDistY - player->deltaDistY) / m->parse->tile_size;
+	m->wall->line_height = (int)(M_HEIGHT / (player->perpWallDist));
 	m->wall->draw_start = (-m->wall->line_height / 2) + (M_HEIGHT / 2);
 	if (m->wall->draw_start < 0)
 		m->wall->draw_start = 0;
@@ -152,11 +153,9 @@ void draw_3d(t_data *m, int x)
 		y++;
 	}
 	texture_prep(m);
-	step = 1.0 * (m->window->tex_h / m->parse->tile_size) / m->wall->line_height;
-	// printf("texX = %f\n", m->window->texX);
-	printf("texX = %f\n", m->window->texX);
+	step = 1.0 * m->window->tex_h / m->wall->line_height;
 	texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
-	while (y < m->wall->draw_end + 1)
+	while (y < m->wall->draw_end)
 	{
 		tex_y = (int)texpos % (m->window->tex_h);
 		// printf("tex_y %d and texpos %d\n", tex_y, (int)texpos);
@@ -207,6 +206,7 @@ void	draw_minimap(t_data *m)
 {
 	draw_grid(m); //Drawing the grid the player will be on 
 	draw_player(m->window, m->player, m->parse->tile_size);//Drawing the player
+	// printf("%d\n", m->parse->tile_size);
 	raycasting(m);  //Function for drawing the rays
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);
 	mlx_hook(m->window->window, 02, 1L << 0, keypress, m); // Keyboard is handled
