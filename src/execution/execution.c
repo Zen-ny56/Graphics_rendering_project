@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/10 20:09:37 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 23:04:20 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,14 @@ void	cal_delta(t_player *player)
 void	calWallDist(t_player *player, t_data *m)
 {
 	if (player->side == 0)
-		player->perpWallDist = (player->sideDistX - player->deltaDistX) / m->parse->tile_size;
+		player->perpWallDist = (player->sideDistX - player->deltaDistX) / (double)m->parse->tile_size;
 	else
-		player->perpWallDist = (player->sideDistY - player->deltaDistY) / m->parse->tile_size;
+		player->perpWallDist = (player->sideDistY - player->deltaDistY) / (double)m->parse->tile_size;
+	if (player->perpWallDist <= 0)
+		player->perpWallDist = 1.0;
 	m->wall->line_height = (int)(M_HEIGHT / (player->perpWallDist));
-	m->wall->draw_start = (-m->wall->line_height / 2) + (M_HEIGHT / 2);
+	// printf("%d\n", m->wall->line_height);
+	m->wall->draw_start = (-m->wall->line_height) / 2 + M_HEIGHT / 2;
 	if (m->wall->draw_start < 0)
 		m->wall->draw_start = 0;
 	m->wall->draw_end = m->wall->line_height / 2 + M_HEIGHT / 2;
@@ -157,9 +160,9 @@ void draw_3d(t_data *m, int x)
 	texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
 	while (y < m->wall->draw_end)
 	{
-		tex_y = (int)texpos % (m->window->tex_h);
-		// printf("tex_y %d and texpos %d\n", tex_y, (int)texpos);
+		tex_y = (int)texpos % m->window->tex_h;
 		texpos += step;
+		// printf("%f %d\n", texpos, tex_y);
 		color = get_color(m, tex_y); // Function to get the color from the texture
 		if (m->player->side == 1) //  the texture if it's a side wall
 			color = (color >> 1) & 0x7F7F7F;
@@ -206,7 +209,6 @@ void	draw_minimap(t_data *m)
 {
 	draw_grid(m); //Drawing the grid the player will be on 
 	draw_player(m->window, m->player, m->parse->tile_size);//Drawing the player
-	// printf("%d\n", m->parse->tile_size);
 	raycasting(m);  //Function for drawing the rays
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);
 	mlx_hook(m->window->window, 02, 1L << 0, keypress, m); // Keyboard is handled
