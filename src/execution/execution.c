@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/08 20:35:24 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 16:31:43 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,13 @@ void draw_3d(t_data *m, int x)
 		y++;
 	}
 	texture_prep(m);
-	step = 1.0 * m->window->tex_h / m->wall->line_height;
+	step = 1.0 * (m->window->tex_h / m->parse->tile_size) / m->wall->line_height;
+	// printf("texX = %f\n", m->window->texX);
+	printf("texX = %f\n", m->window->texX);
 	texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
 	while (y < m->wall->draw_end + 1)
 	{
-		tex_y = (int)texpos % (m->window->tex_h - 1);
+		tex_y = (int)texpos % (m->window->tex_h);
 		// printf("tex_y %d and texpos %d\n", tex_y, (int)texpos);
 		texpos += step;
 		color = get_color(m, tex_y); // Function to get the color from the texture

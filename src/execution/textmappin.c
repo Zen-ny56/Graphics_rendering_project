@@ -6,36 +6,35 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:46:13 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/08 19:55:51 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 16:16:52 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	tex_onwhich_side(t_data *data)
+void tex_onwhich_side(t_data *data)
 {
-	if (data->player->side == 0 && data->player->raydir_x > 0)
-	{
-		data->window->tex_w = data->window->tex_w1;
-		data->window->tex_h = data->window->tex_h1;
-	}
-	else if (data->player->side == 0 && data->player->raydir_x < 0)
-	{
-		data->window->tex_w = data->window->tex_w2;
-		data->window->tex_h = data->window->tex_h2;
-	}
-	else if (data->player->side == 1 && data->player->raydir_y > 0)
-	{
-		data->window->tex_w = data->window->tex_w3;
-		data->window->tex_h = data->window->tex_h3;
-	}
-	else if (data->player->side == 1 && data->player->raydir_y < 0)
-	{
-		data->window->tex_w = data->window->tex_w4;
-		data->window->tex_h = data->window->tex_h4;
-	}
+    if (data->player->side == 0 && data->player->raydir_x > 0)
+    {
+        data->window->tex_w = data->window->tex_w1;
+        data->window->tex_h = data->window->tex_h1;
+    }
+    else if (data->player->side == 0 && data->player->raydir_x < 0)
+    {
+        data->window->tex_w = data->window->tex_w2;
+        data->window->tex_h = data->window->tex_h2;
+    }
+    else if (data->player->side == 1 && data->player->raydir_y > 0)
+    {
+        data->window->tex_w = data->window->tex_w3;
+        data->window->tex_h = data->window->tex_h3;
+    }
+    else if (data->player->side == 1 && data->player->raydir_y < 0)
+    {
+        data->window->tex_w = data->window->tex_w4;
+        data->window->tex_h = data->window->tex_h4;
+    }
 }
-
 void	texture_prep(t_data *data)
 {
 	if (data->player->side == 0) // Check where the ray exactly hits the wall
@@ -51,6 +50,10 @@ void	texture_prep(t_data *data)
 	if (data->player->side == 1 && data->player->raydir_y < 0)
 		data->window->texX = data->window->tex_w - data->window->texX - 1;
     // printf("%f\n", data->window->texX);
+    data->window->texX /= data->parse->tile_size;
+	// data->window->texX /= (int)data->parse->tile_size;
+	// printf("Before calculation - wallX: %f\n", data->wall->wallX);
+	// printf("After calculation - texX: %f\n", data->window->texX);
 }
 
 // void	texture_loop(t_data *data, int x)
