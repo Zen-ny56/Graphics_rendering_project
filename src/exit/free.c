@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:03:27 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/11 12:41:52 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 19:56:58 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ void	free_par(t_parse *parse)
 	if (parse)
 	{
 		if (parse->file_path)
-		{
 			free(parse->file_path);
-			printf("Boop\n");
-		}
 		if (parse->buf)
 			free(parse->buf);
 		if (parse->array)

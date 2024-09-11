@@ -6,12 +6,12 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/11 13:23:21 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 20:11:30 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
+//Norminette this
 int	islineempty(const char *line)
 {
 	int	i;
@@ -68,20 +68,36 @@ void	lastcheckpoint(char *s, t_data *m)
 	}
 }
 
-void	con1(char s, char *b, int *j)
+int	handle_middle_row(char *s, int i, char *b, int j)
 {
-	if (s == ' ')
-		b[(*j)++] = '1';
+	if (i == 0 || s[i] == ' ')
+		b[j++] = '1';  // Convert spaces on the edges or the first column to '1'
+	else if (s[i] == ' ')
+		b[j++] = '0';  // Convert other spaces to '0'
 	else
-		b[(*j)++] = s;
+		b[j++] = s[i];
+	return (j);
 }
 
-void	con2(char s, char *b, int *j)
+int	handle_first_last_row(char c, char *b, int j)
 {
-	if (s == ' ')
-		b[(*j)++] = '1';
+	if (c == ' ')
+		b[j++] = '1';  // Convert space to '1' on the first or last row
 	else
-		b[(*j)++] = '0';
+		b[j++] = c;
+	return (j);
+}
+
+int	fill_remaining_spaces(char *b, int j, t_parse *p, int rows)
+{
+	while (j < p->max)
+	{
+		if (rows == 0 || rows == p->rows - 1)
+			b[j++] = '1';
+		else
+			b[j++] = '0';
+	}
+	return (j);
 }
 
 char	*processtring(char *s, t_parse *p, int rows, t_data *m)
@@ -98,17 +114,11 @@ char	*processtring(char *s, t_parse *p, int rows, t_data *m)
 	while (s[++i])
 	{
 		if (rows == 0 || rows == p->rows - 1)
-			con1(s[i], b, &j);
-		else if (i == 0)
-			con2(s[i], b, &j);
-	}
-	while (j < p->max)
-	{
-		if (rows == 0 || rows == p->rows - 1)
-			b[j++] = '1';
+			j = handle_first_last_row(s[i], b, j);
 		else
-			b[j++] = '0';
+			j = handle_middle_row(s, i, b, j);
 	}
+	j = fill_remaining_spaces(b, j, p, rows); 
 	b[j] = '1';
 	b[j + 1] = '\0';
 	return (b);

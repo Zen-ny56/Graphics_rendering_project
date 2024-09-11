@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:16:42 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/12 18:31:29 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 19:59:03 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ void	assign_fc(int num, char c, t_color *cs)
 			cs->r[1] = num;
 	}
 }
-// iw
-
-
 
 int	allocolor(t_color *c, int k)
 {

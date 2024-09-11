@@ -76,5 +76,20 @@ void	set_plane(t_player *player);
 char	**deep_copy_layout(char **layout, int y);
 int	    point_len(t_point *po);
 void	free_altered(t_map *map);
+void	check_collision(t_data *m, double new_x, double new_y);
+void	set_win_values(t_window *ups, t_data *m);
+int	    point_len(t_point *po);
+char	**deep_copy_layout(char **layout, int y);
+void	free_altered(t_map *map);
+bool	isemptystring(char *str);
+void	free_array(char **s);
+void	free_par(t_parse *parse);
+void    draw_square(t_data *m, t_cur *cur, t_parse *p, int color);
+void	performdda(t_player *player, t_map *map, t_parse *p);
+void	cal_side(t_player *player, t_map *map);
+void	set_direction(t_player *player);
+void	redraw(t_data *m);
+int     basic_movement(int keycode, t_player *player, t_data *m);
+void	change_plane(t_player *player, double angle);
 
 #endif
