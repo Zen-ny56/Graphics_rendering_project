@@ -21,7 +21,7 @@ void	fill(char **tab, t_cur *size, t_cur *cur, int *enclosed)
 		return ;
 	}
 	if (tab[cur->y][cur->x] == '1' || tab[cur->y][cur->x] == 'F')
-		return;
+		return ;
 	tab[cur->y][cur->x] = 'F';
 	fill(tab, size, &(t_cur){cur->x - 1, cur->y}, enclosed);
 	fill(tab, size, &(t_cur){cur->x + 1, cur->y}, enclosed);
@@ -31,8 +31,8 @@ void	fill(char **tab, t_cur *size, t_cur *cur, int *enclosed)
 
 void	check_walls(t_map *map, t_data *m, t_parse *p)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (map->layout[y])
@@ -90,7 +90,7 @@ void	add_coordinatestruct(char **layout, t_data *m, int y)
 	}
 }
 
-void    setplayerposition(int y, t_map *map, t_data *m)
+void	setplayerposition(int y, t_map *map, t_data *m)
 {
 	int i;
 	int	x;
@@ -98,7 +98,6 @@ void    setplayerposition(int y, t_map *map, t_data *m)
 	i = 0;
 	map->px = -1;
 	map->py = -1;
-	
 	while (i < y)
 	{
 		x = 0;
@@ -121,4 +120,3 @@ void    setplayerposition(int y, t_map *map, t_data *m)
 		i++;
 	}
 }
-

@@ -73,5 +73,8 @@ void    add_textures(t_data *m, t_window *w, t_parse *p);
 void	texture_prep(t_data *data);
 int     get_color(t_data *data, int tex_y);
 void	set_plane(t_player *player);
+char	**deep_copy_layout(char **layout, int y);
+int	    point_len(t_point *po);
+void	free_altered(t_map *map);
 
 #endif

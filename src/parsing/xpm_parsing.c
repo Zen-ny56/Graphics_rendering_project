@@ -14,7 +14,7 @@
 
 void	check_xpm(char *r, t_data *m)
 {
-	int len;
+	int	len;
 	int	fd;
 
 	len = ft_strlen(r);
@@ -64,8 +64,8 @@ void	assign_xpm(char *buffer, t_texture *t, t_data *m, int i)
 
 void	save_xpm(char *s, t_texture *t, t_data *m)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	len = 0;
@@ -92,7 +92,8 @@ void	checkstrtexture(char *s, t_texture *t, t_data *m)
 	while (s[i + 1])
 	{
 		if ((s[i] == 'N' && s[i + 1] == 'O') || (s[i] == 'S' && s[i + 1] == 'O')
-			|| (s[i] == 'W' && s[i + 1] == 'E') || (s[i] == 'E' || s[i + 1] == 'A'))
+			|| (s[i] == 'W' && s[i + 1] == 'E')
+			|| (s[i] == 'E' || s[i + 1] == 'A'))
 			save_xpm(&s[i], t, m);
 		i++;
 	}
@@ -100,7 +101,7 @@ void	checkstrtexture(char *s, t_texture *t, t_data *m)
 
 void	parse_texture(t_data *m, t_parse *p)
 {
-	int 		i;
+	int	i;
 
 	i = -1;
 	p->texture = malloc(sizeof(t_texture) * 1);
@@ -110,7 +111,8 @@ void	parse_texture(t_data *m, t_parse *p)
 		error_message(0, m);
 	while (p->array[++i])
 		checkstrtexture(p->array[i], p->texture, m);
-	if (!p->texture->no || !p->texture->so || !p->texture->we || !p->texture->ea)
+	if (!p->texture->no || !p->texture->so
+		|| !p->texture->we || !p->texture->ea)
 		error_message(4, m);
 	m->window = malloc(sizeof(t_window));
 }

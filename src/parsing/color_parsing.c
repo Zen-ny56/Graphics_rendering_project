@@ -40,7 +40,7 @@ void	lastcheckcolor(t_color *c, t_data *m)
 
 void	save_color(char *s, t_color *c, t_data *m)
 {
-	int len;
+	int	len;
 	int	k;
 
 	k = 0;
@@ -49,7 +49,7 @@ void	save_color(char *s, t_color *c, t_data *m)
 	{
 		if (s[len] == 'F' || s[len] == 'C' || s[len] == ',')
 		{
-			store_color(&s[len] ,c ,m ,k);
+			store_color(&s[len], c, m, k);
 			k++;
 		}
 		len--;
@@ -58,7 +58,7 @@ void	save_color(char *s, t_color *c, t_data *m)
 
 void	checkcolors(char *s, t_color *c, t_data *m)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i + 1])
@@ -75,11 +75,13 @@ void	checkcolors(char *s, t_color *c, t_data *m)
 
 void	parse_color(t_data *m, t_parse *p)
 {
+	int	i;
+
 	p->color = malloc(sizeof(t_color));
 	if (!p->color)
 		error_message(0, m);
 	init_color(p->color);
-	int i = -1;
+	i = -1;
 	while (p->array[++i])
 		checkcolors(p->array[i], p->color, m);
 	lastcheckcolor(p->color, m);

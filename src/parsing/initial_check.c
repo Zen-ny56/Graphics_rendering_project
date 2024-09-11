@@ -12,7 +12,7 @@
 
 #include "../include/cub3d.h"
 
-void    find_max(t_parse *p)
+void	find_max(t_parse *p)
 {
 	int	i;
 	int	k;
@@ -22,16 +22,18 @@ void    find_max(t_parse *p)
 	{
 		k = -1;
 		if (!islineempty(p->array[i]) || !precheckinterference(p->array[i]))
-			continue;
-		while (p->array[i][++k]);
-		if (p->max == -1 || k > p->max)
-			p->max = k;
+			continue ;
+		while (p->array[i][++k])
+		{
+			if (p->max == -1 || k > p->max)
+				p->max = k;
+		}
 	}
 }
 
 void	count_rows(t_parse *p)
 {
-	int i;
+	int	i;
 	int	k;
 
 	i = -1;
@@ -39,7 +41,7 @@ void	count_rows(t_parse *p)
 	while (p->array[++i])
 	{
 		if (!islineempty(p->array[i]) || !precheckinterference(p->array[i]))
-			continue;
+			continue ;
 		k++;
 	}
 	p->rows = k;

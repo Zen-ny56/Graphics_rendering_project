@@ -12,14 +12,14 @@
 
 #include "../include/cub3d.h"
 
-void    init_map(t_map *map)
+void	init_map(t_map *map)
 {
 	map->layout = NULL;
 	map->py = -1;
 	map->px = -1;
 }
 
-void    init_parse(t_parse *parse)
+void	init_parse(t_parse *parse)
 {
 	parse->array = NULL;
 	parse->file_path = NULL;
@@ -56,5 +56,5 @@ void	init_main(t_data *m)
 	m->map = NULL;
 	m->player = NULL;
 	m->wall = NULL;
-	m->window = NULL; 
+	m->window = NULL;
 }

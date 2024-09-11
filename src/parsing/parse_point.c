@@ -19,23 +19,23 @@ int	islineempty(const char *line)
 	i = -1;
 	if (!line)
 		return (0);
-    while (line[++i])
-    {
-        if (line[i] != ' ' && line[i] != '\t')
+	while (line[++i])
+	{
+		if (line[i] != ' ' && line[i] != '\t')
 			return (1);
-        i++;
-    }
-    return (0);
+		i++;
+	}
+	return (0);
 }
 
 int	precheckinterference(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (strncmp(&s[i], "NO", 2) == 0 || strncmp(&s[i], "SO", 2) == 0 ||
-		strncmp(&s[i], "WE", 2) == 0 || strncmp(&s[i], "EA", 2) == 0 ||
-		strncmp(&s[i], "F", 1) == 0 || strncmp(&s[i], "C", 1) == 0)
+	if (strncmp(&s[i], "NO", 2) == 0 || strncmp(&s[i], "SO", 2) == 0
+		|| strncmp(&s[i], "WE", 2) == 0 || strncmp(&s[i], "EA", 2) == 0
+		|| strncmp(&s[i], "F", 1) == 0 || strncmp(&s[i], "C", 1) == 0)
 		return (0);
 	return (1);
 }
@@ -45,7 +45,7 @@ void	add_point_to_list(t_point **head, t_point *new_point)
 	t_point	*temp;
 
 	if (!*head)
-		*head = new_point; 
+		*head = new_point;
 	else
 	{
 		temp = *head;
@@ -62,76 +62,72 @@ void	lastcheckpoint(char *s, t_data *m)
 	i = -1;
 	while (s[++i])
 	{
-		if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'E')
+		if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i]
+			!= 'S' && s[i] != 'W' && s[i] != 'E')
 			error_message(7, m);
 	}
 }
 
-char *processtring(char *s, t_parse *p, int rows, t_data *m)
+void	con1(char s, char *b, int *j)
 {
-    int i = -1;
-    int j = 0;
-    char *b;
+	if (s == ' ')
+		b[(*j)++] = '1';
+	else
+		b[(*j)++] = s;
+}
 
-    // Allocate memory for the processed line, with one extra space for the null terminator
-    b = malloc(sizeof(char) * (p->max + 2)); 
-    if (!b)
-        error_message(12, m); // Handle allocation error if necessary
+void	con2(char s, char *b, int *j)
+{
+	if (s == ' ')
+		b[(*j)++] = '1';
+	else
+		b[(*j)++] = '0';
+}
 
-    // Process each character in the input string
-    while (s[++i])
-    {
-        // Convert spaces at the borders (first or last row) to walls ('1')
-        if (rows == 0 || rows == p->rows - 1)
-        {
-            if (s[i] == ' ')
-                b[j++] = '1';
-            else
-                b[j++] = s[i];
-        }
-        else
-        {
-            // Convert the first space of each line to '1' (if it's a wall)
-            if (s[i] == ' ' && i == 0)
-                b[j++] = '1';
-            else if (s[i] == ' ') // Convert any other space within the line to '0'
-                b[j++] = '0';
-            else // Keep any valid map characters unchanged
-                b[j++] = s[i];
-        }
-    }
+char	*processtring(char *s, t_parse *p, int rows, t_data *m)
+{
+	int		i;
+	int		j;
+	char	*b;
 
-    // Fill remaining spaces up to p->max
-    while (j < p->max)
-    {
-        if (rows == 0 || rows == p->rows - 1)
-            b[j++] = '1';  // Fill with '1' if it's the first or last row
-        else
-            b[j++] = '0';  // Fill with '0' for internal spaces
-    }
-    // Ensure the last character is a wall for consistency
-    b[j] = '1';
-    b[j + 1] = '\0';
-
-    // Debug print to show the processed line
-    return (b);
+	i = -1;
+	j = 0;
+	b = malloc(sizeof(char) * (p->max + 2));
+	if (!b)
+		error_message(12, m);
+	while (s[++i])
+	{
+		if (rows == 0 || rows == p->rows - 1)
+			con1(s[i], b, &j);
+		else if (i == 0)
+			con2(s[i], b, &j);
+	}
+	while (j < p->max)
+	{
+		if (rows == 0 || rows == p->rows - 1)
+			b[j++] = '1';
+		else
+			b[j++] = '0';
+	}
+	b[j] = '1';
+	b[j + 1] = '\0';
+	return (b);
 }
 
 void	fill_point(char *s, t_data *m, int rows, t_point **head)
 {
 	t_point		*new;
-  
+
 	m->parse->encountered = 1;
 	new = (t_point *)malloc(sizeof(t_point));
 	new->x_length = m->parse->max;
 	new->row = processtring(s, m->parse, rows, m);
-	// printf("%s\n",new->row);
 	new->next = NULL;
 	lastcheckpoint(new->row, m);
 	add_point_to_list(head, new);
 }
 
-void    parse_point(t_data *m, t_parse *p)
+void	parse_point(t_data *m, t_parse *p)
 {
 	int i;
 	int	rows;
@@ -147,7 +143,7 @@ void    parse_point(t_data *m, t_parse *p)
 		{
 			if (p->encountered == 1)
 				error_message(9, m);
-			continue;
+			continue ;
 		}
 		fill_point(p->array[i], m, rows, &(p->point));
 		rows++;

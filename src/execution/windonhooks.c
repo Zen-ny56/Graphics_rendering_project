@@ -12,22 +12,6 @@
 
 #include "../include/cub3d.h"
 
-void	check_collision(t_data *m, double new_x, double new_y)
-{
-	t_player *pl = m->player;
-	int		t = m->parse->tile_size;
-	// Calculate the future tile position of the player
-	int map_x = (int)(new_x / t);
-	int map_y = (int)(new_y / t);
-	// Check collision for the new position
-	if (m->map->layout[map_y][map_x] != '1') // If the new position is not a wall
-	{
-		pl->pos_x = new_x;
-		pl->pos_y = new_y;
-	}
-	// Else: if it's a wall, do nothing and retain the old position
-}
-
 void	redraw(t_data *m)
 {
 	mlx_clear_window(m->window->mlx, m->window->window);
@@ -41,38 +25,38 @@ void	redraw(t_data *m)
 
 int	basic_movement(int keycode, t_player *player, t_data *m)
 {
-	double	new_x = player->pos_x;
-	double	new_y = player->pos_y;
+	double	new_x;
+	double	new_y;
 
-	// printf("%f %f %f\n", player->pos_x, player->pos_x, player->perpWallDist);
-	if (keycode == 13) // Move W
-	{	
+	new_x = player->pos_x;
+	new_y = player->pos_y;
+	if (keycode == 13)
+	{
 		new_x += player->dir_x * MOVE_SPEED;
 		new_y += player->dir_y * MOVE_SPEED;
 	}
-	else if (keycode == 0) // Move A
+	else if (keycode == 0)
 	{
 		new_x -= player->dir_y * MOVE_SPEED;
 		new_y += player->dir_x * MOVE_SPEED;
 	}
-	else if (keycode == 1) // Move S
+	else if (keycode == 1)
 	{
 		new_x -= player->dir_x * MOVE_SPEED;
 		new_y -= player->dir_y * MOVE_SPEED;
 	}
-	else if (keycode == 2) // Move D
+	else if (keycode == 2)
 	{
 		new_x += player->dir_y * MOVE_SPEED;
 		new_y -= player->dir_x * MOVE_SPEED;
 	}
-	// Call collision check with the new position
 	check_collision(m, new_x, new_y);
 	printf("%f %f %f\n", player->pos_x, player->pos_x, player->perpWallDist);
 	redraw(m);
 	return (0);
 }
 
-int exit_window(t_data *m) // Exit window
+int	exit_window(t_data *m)
 {
 	mlx_clear_window(m->window->mlx, m->window->window);
 	mlx_destroy_window(m->window->mlx, m->window->window);
@@ -81,16 +65,16 @@ int exit_window(t_data *m) // Exit window
 	return (0);
 }
 
-void	change_plane(t_player *player, double angle) // Change the camera plane
+void	change_plane(t_player *player, double angle)
 {
-	double old_plane_x;
+	double	old_plane_x;
 
 	old_plane_x = player->plane_x;
-    player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
-    player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
+	player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
+	player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
 }
 
-void	change_direction(t_player *player, double angle) // Direction of the player has been changed
+void	change_direction(t_player *player, double angle)
 {
 	double old_dir_x;
 
@@ -99,7 +83,7 @@ void	change_direction(t_player *player, double angle) // Direction of the player
     player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos(angle);
 }
 
-void	rotate(t_player *player, double angle, t_data *m) // Handle rotation
+void	rotate(t_player *player, double angle, t_data *m)
 {
 	change_direction(player, angle);
 	change_plane(player, angle);

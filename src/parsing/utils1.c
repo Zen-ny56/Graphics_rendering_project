@@ -12,56 +12,69 @@
 
 #include "../include/cub3d.h"
 
-bool	check_dir(char *arg)
+bool	is_space(char c)
 {
-	int	fd;
-
-	fd = open(arg, O_DIRECTORY);
-	if (fd >= 0)
-	{
-		close(fd);
-		return (true);
-	}
-	close(fd);
-	return (false);
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
 }
 
-bool	check_cub(t_parse *p)
+bool	isemptystring(char *str)
 {
-	int	len;
-	int	fd;
-
-	len = ft_strlen(p->file_path);
-	if (len < 4)
-		return (false);
-	if (p->file_path[len - 1] == 'b' && p->file_path[len - 2] == 'u'
-		&& p->file_path[len - 3] == 'c'
-		&& p->file_path[len - 4] == '.')
+	if (str == NULL)
+		return (true);
+	while (*str)
 	{
-		fd = open(p->file_path, O_RDONLY);
-		if (fd < 0)
+		if (!is_space(*str))
 			return (false);
-		close(fd);
-		return (true);
+		str++;
 	}
-	return (false);
+	return (true);
 }
 
-void	check_input(char **av, t_data *m)
+void	free_altered(t_map *map)
 {
-	m->parse->file_path = ft_strdup(av[1]);
-	if (check_dir(m->parse->file_path) == true)
-		error_message(1, m);
-	if (check_cub(m->parse) == false)
-		error_message(2, m);
+	int	i;
+
+	i = 0;
+	while (map->layout[i])
+	{
+		free(map->layout[i]);
+		map->layout[i++] = NULL;
+	}
+	map->layout = NULL;
 }
 
-void	validate_cmdline(char **av, t_data *m)
+char	**deep_copy_layout(char **layout, int y)
 {
-	m->parse = malloc(sizeof(t_parse));
-	if (!m->parse)
-		error_message(0, m);
-	init_parse(m->parse);
-	check_input(av, m);
-	parse_map(m);
+	char	**copy;
+	int		i;
+
+	i = 0;
+	copy = malloc(sizeof(char *) * y + 1);
+	if (!copy)
+		return (NULL);
+	while (i < y)
+	{
+		copy[i] = ft_strdup(layout[i]);
+		if (!copy[i])
+			return (NULL);
+		i++;
+	}
+	copy[i] = NULL;
+	return (copy);
+}
+
+int	point_len(t_point *po)
+{
+	t_point	*temp;
+	int		i;
+
+	temp = po;
+	i = 0;
+	while (temp)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return (i);
 }

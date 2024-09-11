@@ -36,6 +36,9 @@ void	assign_fc(int num, char c, t_color *cs)
 			cs->r[1] = num;
 	}
 }
+// iw
+
+
 
 int	allocolor(t_color *c, int k)
 {
@@ -69,7 +72,7 @@ int	allocolor(t_color *c, int k)
 	return (-1);
 }
 
-void	store_color(char *s, t_color *c, t_data *m, int	k)
+void	store_color(char *s, t_color *c, t_data *m, int k)
 {
 	int	i;
 	int	num;

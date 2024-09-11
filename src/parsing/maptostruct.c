@@ -14,7 +14,7 @@
 
 void	read_file(int fd, t_parse *p, t_data *m)
 {
-	size_t rd_bytes;
+	size_t	rd_bytes;
 
 	rd_bytes = 1;
 	p->buf = ft_calloc((size_t)BUFFER_SIZE + 1, sizeof(char));
@@ -38,10 +38,10 @@ void	maptostruct(t_data *m, t_parse *p)
 
 void	parse_map(t_data *m)
 {
-	int fd;
+	int	fd;
 
 	fd = open(m->parse->file_path, O_RDONLY);
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX 
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX
 		|| read(fd, 0, 0) < 0)
 		error_message(2, m);
 	read_file(fd, m->parse, m);

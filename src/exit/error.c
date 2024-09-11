@@ -12,7 +12,7 @@
 
 #include "../include/cub3d.h"
 
-void    error_message(int type, t_data *m)
+void	error_message(int type, t_data *m)
 {
 	if (type == 0)
 		ft_putstr_fd("Failed to allocate for memory\n", 2);
@@ -33,7 +33,7 @@ void    error_message(int type, t_data *m)
 	else if (type == 8)
 		ft_putstr_fd("Error player position\n", 2);
 	else if (type == 9)
-		ft_putstr_fd("Map element has to be last and empty line can't be in between\n", 2);
+		ft_putstr_fd("Map element has to be last and empty line\n", 2);
 	else if (type == 10)
 		ft_putstr_fd("Player is not surrounded by walls\n", 2);
 	free_and_exit(m, 1);
