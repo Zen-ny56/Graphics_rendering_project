@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 22:53:19 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/12 00:07:09 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/12 01:11:43 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void	fill_point(char *s, t_data *m, int rows, t_point **head);
 char	*processtring(char *s, t_parse *p, int rows, t_data *m);
 bool	is_space(char c);
 void	assign_fc(int num, char c, t_color *cs);
+void	get_textures_add(t_window *w);
 
 #endif
