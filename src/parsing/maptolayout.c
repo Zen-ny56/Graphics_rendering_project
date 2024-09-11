@@ -65,6 +65,7 @@ void	fill_layout(int y, t_map *map, t_point **head, t_data *m)
 void	pointolayout(t_data *m, t_parse *p, t_point *po)
 {
 	int		y;
+	int		i;
 	char	**copy;
 
 	y = point_len(po);
@@ -73,7 +74,7 @@ void	pointolayout(t_data *m, t_parse *p, t_point *po)
 	allocateheight(y, m->map, m);
 	allowidtheight(y, m->map, &(p->point), m);
 	fill_layout(y, m->map, &(p->point), m);
-	int i = -1;
+	i = -1;
 	while (m->map->layout[++i])
 		printf("%s\n", m->map->layout[i]);
 	setplayerposition(y, m->map, m);

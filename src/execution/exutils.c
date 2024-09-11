@@ -39,7 +39,7 @@ int	calculatetilesize(int window_dimension, int map_dimension)
 	return (o);
 }
 
-void	set_tilesize(t_parse *parse) //Set the size of the tiles
+void	set_tilesize(t_parse *parse)
 {
 	int	k;
 	int	j;

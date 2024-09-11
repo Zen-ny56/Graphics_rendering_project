@@ -91,5 +91,7 @@ void	set_direction(t_player *player);
 void	redraw(t_data *m);
 int     basic_movement(int keycode, t_player *player, t_data *m);
 void	change_plane(t_player *player, double angle);
+void	fill_point(char *s, t_data *m, int rows, t_point **head);
+char	*processtring(char *s, t_parse *p, int rows, t_data *m);
 
 #endif

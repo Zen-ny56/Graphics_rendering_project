@@ -15,7 +15,7 @@ SRCS = ./src/main.c \
 		./src/parsing/parse_point.c ./src/parsing/initial_check.c ./src/execution/add_textures.c ./src/execution/windonhooks2.c\
 		./src/execution/execution.c ./src/execution/drawminimap.c ./src/execution/mark_player.c ./src/execution/windonhooks.c\
 		./src/exit/error.c ./src/exit/free.c ./src/execution/textmappin.c ./src/execution/execution2.c ./src/execution/execution3.c\
-		./src/execution/exutils.c ./src/parsing/utils1.c ./src/exit/freeutils.c\
+		./src/execution/exutils.c ./src/parsing/utils1.c ./src/exit/freeutils.c ./src/parsing/utils2.c\
 
 OBJS = $(SRCS:.c=.o)
 

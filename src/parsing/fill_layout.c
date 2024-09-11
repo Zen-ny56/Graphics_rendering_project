@@ -16,7 +16,7 @@ void	fill(char **tab, t_cur *size, t_cur *cur, int *enclosed)
 {
 	if (cur->y <= 0 || cur->y >= size->y || cur->x <= 0 || cur->x >= size->x)
 	{
-		if (cur->x >= 0 && cur->y >=0 && tab[cur->y][cur->x] == '0')
+		if (cur->x >= 0 && cur->y >= 0 && tab[cur->y][cur->x] == '0')
 			*enclosed = 0;
 		return ;
 	}
@@ -52,11 +52,11 @@ void	check_walls(t_map *map, t_data *m, t_parse *p)
 
 void	checkboundaries(t_data *m, t_cur *cur, t_map *map)
 {
-	(void)cur;
 	t_cur	begin;
 	t_cur	size;
 	int		enclosed;
 
+	(void)cur;
 	enclosed = 1;
 	begin.x = map->px;
 	begin.y = map->py;
@@ -92,7 +92,7 @@ void	add_coordinatestruct(char **layout, t_data *m, int y)
 
 void	setplayerposition(int y, t_map *map, t_data *m)
 {
-	int i;
+	int	i;
 	int	x;
 
 	i = 0;
