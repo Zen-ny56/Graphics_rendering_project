@@ -6,19 +6,11 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 16:36:49 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 17:53:02 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 12:50:47 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void print_color(int color)
-{
-    int r = (color >> 16) & 0xFF;
-    int g = (color >> 8) & 0xFF;
-    int b = color & 0xFF;
-    printf("Color: R=%d G=%d B=%d\n", r, g, b);
-}
 
 int	combine_rgb(int r, int g, int b)
 {

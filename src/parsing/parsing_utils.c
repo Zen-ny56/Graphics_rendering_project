@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:39:54 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/06 17:15:26 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 12:40:31 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ void	init_main(t_data *m)
 {
 	m->parse = NULL;
 	m->map = NULL;
+	m->player = NULL;
+	m->wall = NULL;
 	m->window = NULL; 
 }

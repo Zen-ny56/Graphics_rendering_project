@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:28:47 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/10 19:53:43 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 12:47:32 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void    find_max(t_parse *p)
 		if (p->max == -1 || k > p->max)
 			p->max = k;
 	}
-	printf("%d\n",p->max);
 }
 
 void	count_rows(t_parse *p)

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:01:52 by naadam            #+#    #+#             */
-/*   Updated: 2024/08/20 20:52:20 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 12:56:39 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ void    setplayerposition(int y, t_map *map, t_data *m)
 	int	x;
 
 	i = 0;
+	map->px = -1;
+	map->py = -1;
+	
 	while (i < y)
 	{
 		x = 0;
@@ -105,9 +108,13 @@ void    setplayerposition(int y, t_map *map, t_data *m)
 				map->layout[i][x] == 'W' || map->layout[i][x] == 'E')
 			{
 				if (map->px != -1 || map->py != -1)
+				{
+					printf("%c %d %d\n", map->layout[map->py][map->px], i, x);
 					error_message(8, m);
+				}
 				map->py = i;
 				map->px = x;
+				printf("%c %d %d\n", map->layout[map->py][map->px], i, x);
 			}
 			x++;
 		}
