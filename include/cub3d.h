@@ -5,8 +5,9 @@
 # define BUFFER_SIZE 1000
 #endif
 
-#define GAP_SIZE 1
-#define MOVE_SPEED 1.03
+#define GAP_SIZE 0.00001
+#define MOVE_SPEED 8
+
 #define PI 3.14159265358979323846
 #define FOV (PI / 3)
 #define M_WIDTH 600
@@ -71,5 +72,6 @@ void	set_raydir(t_player *player, t_window *window, t_data *m);
 void    add_textures(t_data *m, t_window *w, t_parse *p);
 void	texture_prep(t_data *data);
 int     get_color(t_data *data, int tex_y);
+void	set_plane(t_player *player);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:37:03 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/07 20:53:48 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 23:04:20 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	set_plane(t_player *player)
 {
+	// double aspect_ratio = (double)M_WIDTH / (double)M_HEIGHT;
 	player->plane_length = tan(PI / 6); // Plane length is fixed
 	//Set camera plane
 	player->plane_x = player->dir_y * player->plane_length; 
@@ -75,7 +76,7 @@ void draw_ray(t_window *w, t_player *player, int color)
     // Draw the ray in short segments
     double current_x = player->pos_x;
     double current_y = player->pos_y;
-    double distance_remaining = player->perpWallDist;
+    double distance_remaining = player->perpWallDist  * 21;
     while (distance_remaining > 0)
     {
         // Convert current position to pixel coordinates
@@ -125,13 +126,14 @@ void	cal_delta(t_player *player)
 void	calWallDist(t_player *player, t_data *m)
 {
 	if (player->side == 0)
-		player->perpWallDist = player->sideDistX - player->deltaDistX;
+		player->perpWallDist = (player->sideDistX - player->deltaDistX) / (double)m->parse->tile_size;
 	else
-		player->perpWallDist = player->sideDistY - player->deltaDistY;
-	m->wall->line_height = (int)(M_HEIGHT / player->perpWallDist);
+		player->perpWallDist = (player->sideDistY - player->deltaDistY) / (double)m->parse->tile_size;
+	if (player->perpWallDist <= 0)
+		player->perpWallDist = 1.0;
+	m->wall->line_height = (int)(M_HEIGHT / (player->perpWallDist));
 	// printf("%d\n", m->wall->line_height);
-    m->wall->draw_start = (M_HEIGHT / 2) - (m->wall->line_height / 2);
-	// printf("%d %d\n", (m->wall->line_height / 2 + M_HEIGHT / 2 , m->wall->draw_start);
+	m->wall->draw_start = (-m->wall->line_height) / 2 + M_HEIGHT / 2;
 	if (m->wall->draw_start < 0)
 		m->wall->draw_start = 0;
 	m->wall->draw_end = m->wall->line_height / 2 + M_HEIGHT / 2;
@@ -141,34 +143,36 @@ void	calWallDist(t_player *player, t_data *m)
 
 void draw_3d(t_data *m, int x)
 {
-    int y;
-    double step;
-    double texpos;
-    int tex_y;
-    int color;
+	int y;
+	double step;
+	double texpos;
+	int tex_y;
+	int color;
 
-    for (y = 0; y < m->wall->draw_start; y++) 
-    {
-		if (x < M_HEIGHT && y < M_WIDTH)
-    	    my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // X and Y being passed in here
-    }
-    texture_prep(m);
-    step = 1.0 * m->window->tex_h / m->wall->line_height;
-    texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
-    y = m->wall->draw_start;
-    while (y < m->wall->draw_end)
-    {
-        tex_y = (int)texpos & (m->window->tex_h - 1);
-        texpos += step;
-        color = get_color(m, tex_y); // Function to get the color from the texture
-        if (m->player->side == 1) // Darken the texture if it's a side wall
-            color = (color >> 1) & 0x7F7F7F;
-        my_mlx_pixel_put(m->window, x, y, color); // X and Y being passed in here
+	y = 0;
+	while (y < m->wall->draw_start)
+	{
+		my_mlx_pixel_put(m->window, x, y, m->parse->color->ceiling_color); // X and Y being passed in here
+		y++;
+	}
+	texture_prep(m);
+	step = 1.0 * m->window->tex_h / m->wall->line_height;
+	texpos = (m->wall->draw_start - M_HEIGHT / 2 + m->wall->line_height / 2) * step;
+	while (y < m->wall->draw_end)
+	{
+		tex_y = (int)texpos % m->window->tex_h;
+		texpos += step;
+		// printf("%f %d\n", texpos, tex_y);
+		color = get_color(m, tex_y); // Function to get the color from the texture
+		if (m->player->side == 1) //  the texture if it's a side wall
+			color = (color >> 1) & 0x7F7F7F;
+		my_mlx_pixel_put(m->window, x, y, color); // X and Y being passed in here
         y++;
     }
-    for (y = m->wall->draw_end; y < M_HEIGHT; y++) 
+    while (y < M_HEIGHT) 
     {
-        my_mlx_pixel_put(m->window, x, y, m->parse->color->floor_color); // X and Y being passed in here
+		my_mlx_pixel_put(m->window, x, y, m->parse->color->floor_color); // X and Y being passed in here
+		y++;
     }
 }
 
@@ -189,7 +193,6 @@ void	set_raydir(t_player *player, t_window *window, t_data *m)
 		performDDA(player, m->map, m->parse);
 		calWallDist(player, m);
 		draw_3d(m, x);
-		// textureMappin(player, m);
 		// draw_ray(m->window, m->player, 0x00FF00);			
 		x++;
 	}

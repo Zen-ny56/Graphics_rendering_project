@@ -6,24 +6,26 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:27:25 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/05 15:01:52 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/10 23:11:25 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_collision(t_data *m, double ox, double oy)
+void	check_collision(t_data *m, double new_x, double new_y)
 {
-	t_player *pl;
-	int		t;
-
-	pl = m->player;
-	t = m->parse->tile_size;
-	if (m->map->layout[(int)pl->pos_y / t][(int)pl->pos_x / t] == '1')
+	t_player *pl = m->player;
+	int		t = m->parse->tile_size;
+	// Calculate the future tile position of the player
+	int map_x = (int)(new_x / t);
+	int map_y = (int)(new_y / t);
+	// Check collision for the new position
+	if (m->map->layout[map_y][map_x] != '1') // If the new position is not a wall
 	{
-		m->player->pos_x = ox;
-		m->player->pos_y = oy;
-	}	
+		pl->pos_x = new_x;
+		pl->pos_y = new_y;
+	}
+	// Else: if it's a wall, do nothing and retain the old position
 }
 
 void	redraw(t_data *m)
@@ -32,35 +34,40 @@ void	redraw(t_data *m)
 	set_tilesize(m->parse);
 	draw(m, m->map, m->cur, m->parse);
 	draw_player(m->window, m->player, m->parse->tile_size);
+	// set_plane(m->player);
 	set_raydir(m->player, m->window, m);
 	mlx_put_image_to_window(m->window->mlx, m->window->window, m->window->img, 0, 0);	
 }
 
 int	basic_movement(int keycode, t_player *player, t_data *m)
 {
-	double	original_x = player->pos_x;
-	double	original_y = player->pos_y;
-	if (keycode == 13)
+	double	new_x = player->pos_x;
+	double	new_y = player->pos_y;
+
+	// printf("%f %f %f\n", player->pos_x, player->pos_x, player->perpWallDist);
+	if (keycode == 13) // Move W
 	{	
-		player->pos_x += player->dir_x * MOVE_SPEED;
-		player->pos_y += player->dir_y * MOVE_SPEED;
+		new_x += player->dir_x * MOVE_SPEED;
+		new_y += player->dir_y * MOVE_SPEED;
 	}
-	else if (keycode == 0)
+	else if (keycode == 0) // Move A
 	{
-		player->pos_x += player->dir_y * MOVE_SPEED;
-		player->pos_y -= player->dir_x * MOVE_SPEED;
+		new_x -= player->dir_y * MOVE_SPEED;
+		new_y += player->dir_x * MOVE_SPEED;
 	}
-	else if (keycode == 1)
+	else if (keycode == 1) // Move S
 	{
-		player->pos_x -= player->dir_x * MOVE_SPEED;
-		player->pos_y -= player->dir_y * MOVE_SPEED;
+		new_x -= player->dir_x * MOVE_SPEED;
+		new_y -= player->dir_y * MOVE_SPEED;
 	}
-	else if (keycode == 2)
+	else if (keycode == 2) // Move D
 	{
-		player->pos_x -= player->dir_y * MOVE_SPEED;
-		player->pos_y += player->dir_x * MOVE_SPEED;
+		new_x += player->dir_y * MOVE_SPEED;
+		new_y -= player->dir_x * MOVE_SPEED;
 	}
-	check_collision(m, original_x, original_y);
+	// Call collision check with the new position
+	check_collision(m, new_x, new_y);
+	printf("%f %f %f\n", player->pos_x, player->pos_x, player->perpWallDist);
 	redraw(m);
 	return (0);
 }
