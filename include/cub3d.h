@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 22:53:19 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/11 22:56:50 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/12 00:07:09 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ int		basic_movement(int keycode, t_player *player, t_data *m);
 void	change_plane(t_player *player, double angle);
 void	fill_point(char *s, t_data *m, int rows, t_point **head);
 char	*processtring(char *s, t_parse *p, int rows, t_data *m);
+bool	is_space(char c);
+void	assign_fc(int num, char c, t_color *cs);
 
 #endif

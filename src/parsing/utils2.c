@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_cmdline.c                                 :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 19:12:10 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/06 15:55:08 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 23:18:46 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	fill_point(char *s, t_data *m, int rows, t_point **head)
 	new = (t_point *)malloc(sizeof(t_point));
 	new->x_length = m->parse->max;
 	new->row = processtring(s, m->parse, rows, m);
+	printf("%s\n", new->row);
 	new->next = NULL;
 	lastcheckpoint(new->row, m);
 	add_point_to_list(head, new);

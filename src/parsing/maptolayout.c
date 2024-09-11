@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:11:39 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/11 20:02:00 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 23:55:14 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,13 @@ void	pointolayout(t_data *m, t_parse *p, t_point *po)
 	int		i;
 	char	**copy;
 
+	i = -1;
 	y = point_len(po);
 	m->map = malloc(sizeof(t_map));
 	init_map(m->map);
 	allocateheight(y, m->map, m);
 	allowidtheight(y, m->map, &(p->point), m);
 	fill_layout(y, m->map, &(p->point), m);
-	i = -1;
-	while (m->map->layout[++i])
-		printf("%s\n", m->map->layout[i]);
 	setplayerposition(y, m->map, m);
 	add_coordinatestruct(m->map->layout, m, y);
 	copy = deep_copy_layout(m->map->layout, y);

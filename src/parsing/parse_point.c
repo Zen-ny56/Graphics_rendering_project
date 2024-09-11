@@ -6,7 +6,7 @@
 /*   By: naadam <naadam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 13:40:41 by naadam            #+#    #+#             */
-/*   Updated: 2024/09/11 20:11:30 by naadam           ###   ########.fr       */
+/*   Updated: 2024/09/11 23:55:59 by naadam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	handle_middle_row(char *s, int i, char *b, int j)
 {
 	if (i == 0 || s[i] == ' ')
 		b[j++] = '1';
-	else if (s[i] == ' ')
+	else if (is_space(s[i]) == true)
 		b[j++] = '0';
 	else
 		b[j++] = s[i];
@@ -25,7 +25,7 @@ int	handle_middle_row(char *s, int i, char *b, int j)
 
 int	handle_first_last_row(char c, char *b, int j)
 {
-	if (c == ' ')
+	if (is_space(c) == true)
 		b[j++] = '1';
 	else
 		b[j++] = c;
@@ -52,7 +52,7 @@ char	*processtring(char *s, t_parse *p, int rows, t_data *m)
 
 	i = -1;
 	j = 0;
-	b = malloc(sizeof(char) * (p->max + 2));
+	b = malloc(sizeof(char) * (p->max + 1));
 	if (!b)
 		error_message(12, m);
 	while (s[++i])

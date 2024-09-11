@@ -9,6 +9,8 @@
         "cmath": "c",
         "complex": "c",
         "locale": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "__locale": "c",
+        "cctype": "c"
     }
 }
